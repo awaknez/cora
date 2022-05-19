@@ -3,11 +3,12 @@ class ReservationsController < ApplicationController
 
   def index
     @reservations = Reservation.all
+        #  binding.pry
+
   end
 
    def new
      @reservation = Reservation.new
-    #  binding.pry
      @date = params[:date]
      @time = params[:time]
      @start_time = DateTime.parse(@date + " " + @time + " " +"JST")
@@ -15,10 +16,11 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation = Reservation.new(reservation_params)
-    if @reservation.save
-      redirect_to root_path
+    @date_parse = @reservation.date.strftime("%Y年%m月%d日")
+    @time = @reservation.time
+    unless @reservation.save
+      # redirect_to root_path
       # reservation_path(@reservation.id)
-    else
       render :new
     end
   end

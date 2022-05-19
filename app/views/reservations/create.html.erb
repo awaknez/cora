@@ -1,0 +1,15 @@
+<h1>申し込みが完了しました。</h1>
+
+<h3>申し込み日時</h3><br />
+<%= "#{@date_parse}"%><br />
+<%= "#{@time}"%>
+
+<h4>ご参加予定人数</h4>
+<%= @reservation.number_of_people.name%>
+<h4>面談形式</h4>
+<%= @reservation.style.name%>
+
+<h4>面談で相談したいこと</h4>
+
+<%=link_to "マイページで申込状況を確認する", "#" %><br />
+<%=link_to "空き状況ページに戻る", root_path %>

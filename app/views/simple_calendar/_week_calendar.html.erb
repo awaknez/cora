@@ -43,9 +43,12 @@
               <td>
                <!-- 追加 -->
                 <!-- ここから -->
+                     <%# <% binding.pry%>
                  <% if day.wday == 0 %>
                  <%= "-"%>
                  <% elsif check_reservation(reservations, day, time) %>
+
+
                    <%= '×' %>
                  <% else %>
                    <%= link_to '○', new_reservation_path(date: day, time: time) %>
