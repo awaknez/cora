@@ -31,7 +31,7 @@
         </div>
         <%= form.text_area :question, class:"input-question", id:"pre-question", placeholder:"面談にて相談したいことがございましたら事前にご記入ください。",rows:"7" ,maxlength:"1000"%>
 
-      <%= form.hidden_field :user_id, value: current_user.id %>
+      <%# <%= form.hidden_field :user_id, value: current_user.id %>
       <%= form.hidden_field :start_time, value: @start_time %>
       <div class="submit">
         <%= form.submit value: '予約する', class: 'btn btn-primary mx-auto d-block' %>
