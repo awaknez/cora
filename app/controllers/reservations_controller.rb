@@ -1,11 +1,13 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user! ,only: [:new]
+
   def index
     @reservations = Reservation.all
   end
 
-  # def new
-  #   @reservation = Reservation.new
-  # end
+   def new
+     @reservation = Reservation.new
+   end
 
   # def create
   #   @reservation = Reservation.new(reservation_params)

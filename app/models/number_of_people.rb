@@ -1,4 +1,4 @@
-class Homeroom < ActiveHash::Base #ここがActiveHash :: Baseの継承
+class NumberOfPeople < ActiveHash::Base #ここがActiveHash :: Baseの継承
   self.data = [
     { id: 1, name: '--' },
     { id: 2, name: '保護者のみ' },

@@ -6,15 +6,32 @@
     </div>
     <div class="col-12 mt-3 content">
       <%= form_with model: @reservation, local: true, class: 'form' do |form| %>
-      <%= render 'layouts/error_messages', model: form.object %>
+      <%# <%= render 'layouts/error_messages', model: form.object %>
       <div class="day form-group">
-        <%= form.label :day, '日付' %>
-        <%= form.text_field :day, class: 'form-control', value: @day, readonly: true %>
+        <%= form.label :date, '日付' %>
+        <%= form.text_field :date, class: 'form-control', readonly: true %>
+         <%# value: @day value: @time,%>
       </div>
       <div class="time form-group">
         <%= form.label :time, '時間' %>
-        <%= form.text_field :time, class: 'form-control', value: @time, readonly: true %>
+        <%= form.text_field :time, class: 'form-control',  readonly: true %>
       </div>
+           <div class="form">
+        <div class="weight-bold-text">
+          ご参加予定人数
+          <span class="indispensable">必須</span>
+        </div>
+        <%= form.collection_select(:number_of_people_id, NumberOfPeople.all, :id, :name, {}, {class:"select-box", id:"nuber_of_people-category"}) %><br />
+        <div class="weight-bold-text">
+          面談形式（お選びください）
+          <span class="indispensable">必須</span>
+        </div>
+        <%= form.collection_select(:style_id, Style.all, :id, :name, {}, {class:"select-box", id:"style-category"}) %><br />
+        <div class="weight-bold-text">
+          面談で相談したいこと（任意）
+        </div>
+        <%= form.text_area :question, class:"input-question", id:"pre-question", placeholder:"面談にて相談したいことがございましたら事前にご記入ください。",rows:"7" ,maxlength:"1000"%>
+
       <%= form.hidden_field :user_id, value: current_user.id %>
       <%= form.hidden_field :start_time, value: @start_time %>
       <div class="submit">
