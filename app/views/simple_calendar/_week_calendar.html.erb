@@ -8,7 +8,7 @@
     <% end %>
     <%= link_to t('simple_calendar.next', default: '次の週へ'), calendar.url_for_next_view %>
        <!-- ポイント -->
-    <%# <% reservations = Reservation.reservations_after_three_month %> %>
+     <% reservations = Reservation.reservations_after_three_month %>
   </div>
 
   <table class="table table-striped">
@@ -24,7 +24,7 @@
     <tbody>
       <% date_range.each_slice(7) do |week| %>
         <tr>
-        <td></td>
+        <td></td><!--空のセル-->
           <% week.each do |day| %>
             <%= content_tag :td, class: calendar.td_classes_for(day) do %>
               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
@@ -43,11 +43,11 @@
               <td>
                <!-- 追加 -->
                 <!-- ここから -->
-                <%# <% if check_reservation(reservations, date, time) %>
-                  <%# <%= '×' %>
-                <%# <% else %>
-                  <%# <%= '○' %>
-                <%# <% end %>
+                 <% if check_reservation(reservations, day, time) %>
+                   <%= '×' %>
+                 <% else %>
+                   <%= '○' %>
+                 <% end %>
                 <!-- ここまで -->
               </td>
             <% end %>

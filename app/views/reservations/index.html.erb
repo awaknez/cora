@@ -10,6 +10,8 @@
   </ul>
 <% end %>
 
+<%= link_to "新規予約する", new_reservation_path %>
+
 <!--ここからカレンダー-->
 <%= week_calendar events: @reservations do |date, reservations| %>
     <%= date.day %>
