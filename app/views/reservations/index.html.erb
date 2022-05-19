@@ -1,0 +1,9 @@
+<h1>CORAへようこそ</h1>
+<% if user_signed_in? %>
+<h3>ログイン中</h3>
+<% else %>
+  <ul class='lists-right'>
+    <li><%= link_to  "新規登録", new_user_registration_path,class: "sign-up" %></li>
+    <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
+  </ul>
+<% end %>
