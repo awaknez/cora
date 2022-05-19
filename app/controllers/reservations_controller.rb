@@ -7,6 +7,9 @@ class ReservationsController < ApplicationController
 
    def new
      @reservation = Reservation.new
+    #  binding.pry
+     @date = params[:date]
+     @time = params[:time]
    end
 
   # def create

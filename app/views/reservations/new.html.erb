@@ -9,12 +9,11 @@
       <%# <%= render 'layouts/error_messages', model: form.object %>
       <div class="day form-group">
         <%= form.label :date, '日付' %>
-        <%= form.text_field :date, class: 'form-control', readonly: true %>
-         <%# value: @day value: @time,%>
+        <%= form.text_field :date, class: 'form-control', value: @date, readonly: true %>
       </div>
       <div class="time form-group">
         <%= form.label :time, '時間' %>
-        <%= form.text_field :time, class: 'form-control',  readonly: true %>
+        <%= form.text_field :time, class: 'form-control',  value: @time, readonly: true %>
       </div>
            <div class="form">
         <div class="weight-bold-text">

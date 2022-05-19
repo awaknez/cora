@@ -39,7 +39,7 @@
         <% time_schedule.each do |time| %>
           <tr>
             <td><%= time %></td>
-            <%= week.each do |day| %> <!-- 最後にイコール消すこと-->
+            <% week.each do |day| %> <!-- 最後にイコール消すこと-->
               <td>
                <!-- 追加 -->
                 <!-- ここから -->
@@ -48,7 +48,7 @@
                  <% elsif check_reservation(reservations, day, time) %>
                    <%= '×' %>
                  <% else %>
-                   <%= link_to '○', new_reservation_path %>
+                   <%= link_to '○', new_reservation_path(date: day, time: time) %>
                  <% end %>
                 <!-- ここまで -->
               </td>
