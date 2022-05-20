@@ -3,6 +3,7 @@ class Reservation < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :number_of_people
   belongs_to :style
+  belongs_to :user
 
   def self.reservations_after_three_month
     # 今日から3ヶ月先までのデータを取得
