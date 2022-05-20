@@ -2,7 +2,7 @@
 
 <h2>申込詳細</h2>
 
-     <% if current_user.group_id = 2%>
+     <% if current_user.group_id == 2%>
         <table>
         <thead>
           <tr>
@@ -51,5 +51,5 @@
     <%= link_to "削除",reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }%>
   <% end %>
   <br />
-  <%=link_to "トップページに戻る", root_path %>
+  <%=link_to "マイページに戻る", user_path(current_user.id) %>
 </div>
