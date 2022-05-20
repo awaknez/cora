@@ -43,6 +43,12 @@ class ReservationsController < ApplicationController
   end
  end
 
+ def destroy
+  reservation = Reservation.find(params[:id])
+  reservation.destroy
+  redirect_to user_path(reservation.user_id)
+ end
+
   private
   def reservation_params
     params.require(:reservation).permit(:date,:time,:start_time,:style_id,:number_of_people_id,:question).merge(user_id:current_user.id)
