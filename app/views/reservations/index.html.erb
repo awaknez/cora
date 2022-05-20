@@ -5,7 +5,6 @@
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %>
   <% if current_user.group_id != 2%>
   <%= link_to "マイページで申込状況を確認する", "users/#{current_user.id}" %><br />
-  <%= link_to "新規予約する", new_reservation_path %>
   <% end %><br />
 <% else %>
   <ul class='lists-right'>
@@ -28,7 +27,7 @@
     <% end %>
   <% end %>
 
-<% else %> %>
+<% else %>
   <%= week_calendar events: @reservations do |date, reservations| %>
       <%= date.day %>
    <% end %>
