@@ -1,0 +1,32 @@
+<div class="contents row">
+  <p>ようこそ<%= @user_name %>さん</p><br />
+
+<h2>申込一覧</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>お日にち</td>
+        <td>時間</td>
+        <td>面談形式</td>
+        <td>ご参加予定人数</td>
+        <td>申込の詳細</td>
+        <td>申込の編集</td>
+        <td>申込の削除</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+      <tr>
+      <td><%= reservation.date.strftime("%Y年%m月%d日")%></td>
+      <td><%= reservation.time%></td>
+      <td><%= reservation.style.name%></td>
+      <td><%= reservation.number_of_people.name%></td>
+      <td><%= link_to "詳細",reservation_path(reservation.id)%></td>
+      <td><%= link_to "編集",edit_reservation_path(reservation.id)%></td>
+      <td><%= link_to "削除",reservation_path(reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }%></td>
+      </tr><br />
+      <% end %>
+    </tbody>
+  </table>
+  <%=link_to "空き状況ページに戻る", root_path %>
+</div>
