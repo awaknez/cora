@@ -3,7 +3,9 @@
   <%# <li><%= link_to current_user.nickname, "#", class: "user-nickname" %>
   <span>ようこそ <%= "#{(current_user.name_last_name) + (current_user.name_first_name)}"%>さん</span>
   <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %>
+  <% if current_user.group_id != 2%>
   <%= link_to "マイページで申込状況を確認する", "users/#{current_user.id}" %><br />
+  <% end %><br />
 <% else %>
   <ul class='lists-right'>
     <li><%= link_to  "新規登録", new_user_registration_path,class: "sign-up" %></li>
@@ -11,9 +13,22 @@
   </ul>
 <% end %>
 
-<%= link_to "新規予約する", new_reservation_path %>
+
 
 <!--ここからカレンダー-->
-<%= week_calendar events: @reservations do |date, reservations| %>
+<% if current_user.group_id == 2 %>
+  <%= month_calendar events: @reservations do |date, reservations| %>
     <%= date.day %>
-<% end %>
+    <% reservations.each do |reservation|%>
+    <div>
+    <% show_reservation = %>
+    <%= link_to "#{(reservation.time)+' '+(reservation.user.grade.name)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", reservation_path(reservation.id)%>
+    </div>
+    <% end %>
+  <% end %>
+
+<% else %>
+  <%= week_calendar events: @reservations do |date, reservations| %>
+      <%= date.day %>
+   <% end %>
+  <% end %>

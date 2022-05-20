@@ -1,8 +1,8 @@
 class ReservationsController < ApplicationController
-  before_action :authenticate_user! ,only: [:new]
+  before_action :authenticate_user! ,only: [:index,:new]
 
   def index
-    @reservations = Reservation.all
+    @reservations = Reservation.all.order(date: "ASC" ,time: "ASC")
         #  binding.pry
 
   end
@@ -35,11 +35,11 @@ class ReservationsController < ApplicationController
  end
 
  def update
-  reservation = Reservation.find(params[:id])
-  unless reservation.update(reservation_params)
+  @reservation = Reservation.find(params[:id])
+  @date_parse = @reservation.date.strftime("%Y年%m月%d日")
+  @time = @reservation.time
+  unless @reservation.update(reservation_params)
     render :edit
-  else
-    redirect_to reservation_path(reservation.id)
   end
  end
 

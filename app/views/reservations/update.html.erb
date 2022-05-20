@@ -1,4 +1,4 @@
-<h1>申し込みが完了しました。</h1>
+<h1>申し込み編集が完了しました。</h1>
 
 <h3>申し込み日時</h3><br />
 <%= "#{@date_parse}"%><br />
@@ -11,6 +11,5 @@
 
 <h4>面談で相談したいこと</h4>
 <%= @reservation.question%>
-
+<br/>
 <%=link_to "マイページで申込状況を確認する", user_path(current_user.id) %><br />
-<%=link_to "空き状況ページに戻る", root_path %>
