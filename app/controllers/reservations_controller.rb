@@ -29,6 +29,20 @@ class ReservationsController < ApplicationController
   @reservation = Reservation.find(params[:id])
  end
 
+ def edit
+  @reservation = Reservation.find(params[:id])
+
+ end
+
+ def update
+  reservation = Reservation.find(params[:id])
+  unless reservation.update(reservation_params)
+    render :edit
+  else
+    redirect_to reservation_path(reservation.id)
+  end
+ end
+
   private
   def reservation_params
     params.require(:reservation).permit(:date,:time,:start_time,:style_id,:number_of_people_id,:question).merge(user_id:current_user.id)

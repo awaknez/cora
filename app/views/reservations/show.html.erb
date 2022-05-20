@@ -13,11 +13,18 @@
     </thead>
     <tbody>
       <tr>
-      <td><%= @reservation.date.strftime("%Y年%m月%d日")%></td>
-      <td><%= @reservation.time%></td>
-      <td><%= @reservation.style.name%></td>
-      <td><%= @reservation.number_of_people.name%></td>
-      </tr><br />
+        <td><%= @reservation.date.strftime("%Y年%m月%d日")%></td>
+        <td><%= @reservation.time%></td>
+        <td><%= @reservation.style.name%></td>
+        <td><%= @reservation.number_of_people.name%></td>
+      </tr>
+      <tr>
+        <td>面談で相談したいこと</td>
+      </tr>
+      <tr>
+        <td><%= @reservation.question%></td>
+      </tr>
+      <br />
     </tbody>
   </table>
   <p>面談形式・ご参加人数変更の場合はこちら</p>
