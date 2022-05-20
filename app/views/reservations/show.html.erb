@@ -1,0 +1,30 @@
+<div class="contents row">
+
+<h2>申込詳細</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>お日にち</td>
+        <td>時間</td>
+        <td>面談形式</td>
+        <td>ご参加予定人数</td>
+      
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <td><%= @reservation.date.strftime("%Y年%m月%d日")%></td>
+      <td><%= @reservation.time%></td>
+      <td><%= @reservation.style.name%></td>
+      <td><%= @reservation.number_of_people.name%></td>
+      </tr><br />
+    </tbody>
+  </table>
+  <p>面談形式・ご参加人数変更の場合はこちら</p>
+  <%= link_to "編集",edit_reservation_path(@reservation.id)%>
+  <p>日時変更の場合はこちら※削除後、再申込してください。</p>
+  <%= link_to "削除",reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }%>
+
+  <br />
+  <%=link_to "空き状況ページに戻る", root_path %>
+</div>

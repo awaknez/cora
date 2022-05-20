@@ -1,5 +1,7 @@
 <div class="contents row">
-  <p>ようこそ<%= @user_name %>さん</p><br />
+  <p>ようこそ<%= @user_name %>さん</p>
+    <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %>
+    <br />
 
 <h2>申込一覧</h2>
   <table>
