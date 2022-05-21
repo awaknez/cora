@@ -24,7 +24,8 @@
     <tbody>
       <% date_range.each_slice(7) do |week| %>
         <tr>
-        <td></td><!--空のセル-->
+        <!--空のセル-->
+        <td></td>
           <% week.each do |day| %>
             <%= content_tag :td, class: calendar.td_classes_for(day) do %>
               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
