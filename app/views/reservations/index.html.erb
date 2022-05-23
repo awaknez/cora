@@ -19,21 +19,10 @@
 
 <!--ここからカレンダー-->
     <div class="col-12 mt-3">
-      <% if current_user.group_id == 2 %>
-        <%= month_calendar events: @reservations do |date, reservations| %>
-          <%= date.day %>
-          <% reservations.each do |reservation|%>
-          <div>
-          <% show_reservation = %>
-          <%= link_to "#{(reservation.time)+' '+(reservation.user.grade.name)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", reservation_path(reservation.id)%>
-          </div>
-          <% end %>
-      <% end %>
-    </div>
-      <% else %>
+
         <div class="col-12 mt-3">
             <%= week_calendar events: @reservations do |date, reservations| %>
               <%= date.day %>
             <% end %>
-          <% end %> 
+        <%# <% end %>
         </div>
