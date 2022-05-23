@@ -3,7 +3,7 @@ class ReservationMailer < ApplicationMailer
     @reservation = reservation
     mail(
       from: Rails.application.credentials.gmail[:address],
-      to:   'jahn_jack9@yahoo.co.jp',
+      to:   reservation.email,
       subject: 'お申し込みを受付けました'
     )
   end
