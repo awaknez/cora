@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta content="text/html; charset=UTF-8" />
+  <style type="text/css">
+
+      p hr {
+        color: #2d2a24;
+      }
+
+      .reserve-content{
+        list-style-type: none;
+      }
+      .attention{
+        list-style-type: square;
+      }
+
+  </style>
+</head>
+<body>
+    <% days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]%>
+    
+    <h4><%=(@reservation.user.name_last_name)+" "+(@reservation.user.name_first_name)+" "%>様<br>
+    保護者 様</h4>
+
+    <br />
+    この度は、ご面談のお申し込み、誠にありがとうございます。
+    以下の日時でお申し込みを受付いたしました。
+    <hr />
+    <ul class="reserve-content">
+      <p>【お申込み内容】</p>
+      <li>■日時：
+        <br /><%= @reservation.date.strftime("%Y年%m月%d日") %><%= " "+days[@reservation.date.wday]%>
+        <br /><%= @reservation.time %>
+      </li><br>
+      <li>■形式：
+        <br /><%= @reservation.style.name %></li><br>
+      <li>■ご参加予定人数：
+        <br /><%= @reservation.number_of_people.name %></li><br>
+      <li>■面談で相談したいこと：
+        <br /><%= @reservation.question %></li><br>
+    </ul>
+    <hr />
+      <ul>
+        <p>《お持ち物》</P>
+          <li>成績資料（模試の結果、定期考査の結果がわかるもの）</li>
+          <li>筆記具</li>
+          <li>印鑑（無料体験などのお申し込みがある場合）</li>
+      </ul>
+    <hr />
+      <ul class="attention">
+        <p>《ご注意》</p>
+        <li>ご都合が悪くなった場合には、
+            誠に恐れ入りますが、
+            下記の方法にてご対応をお願い致します。</li>
+
+        <li> 前日までに面談日や時間を変更したい場合<br>
+            マイページよりお申込み内容を削除いただき、
+            再度、ご都合の良いお日にちでお申込みください。</li>
+
+       <li>当日に面談日や時間を変更したい場合
+          誠に恐れ入りますが、下記連絡先までご連絡をお願いいたします。</li>
+
+        <p>（連絡先）
+        0120-xxx-xxxx</p>
+     </ul>
+    <hr />
+
+    <p>・本メールに記載されている内容に関するご不明点等ございましたら
+    お通いの教室までご連絡ください。</p>
+
+
+    <p>塾名<br>
+    教室名</p>
+    <hr />
+    <p>Copyright(c) 2022 ●●</p>
+</body>
+</html>

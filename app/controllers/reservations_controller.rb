@@ -38,6 +38,7 @@ class ReservationsController < ApplicationController
   @reservation = Reservation.find(params[:id])
   @date_parse = @reservation.date.strftime("%Y年%m月%d日")
   @time = @reservation.time
+  ReservationMailer.sendmail_when_reserve(@reservation).deliver
   unless @reservation.update(reservation_params)
     render :edit
   end
