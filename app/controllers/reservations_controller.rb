@@ -18,6 +18,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new(reservation_params)
     @date_parse = @reservation.date.strftime("%Y年%m月%d日")
     @time = @reservation.time
+    ReservationMailer.sendmail_when_reserve(@reservation).deliver
     unless @reservation.save
       # redirect_to root_path
       # reservation_path(@reservation.id)
