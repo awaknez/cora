@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :authenticate_user! ,only: [:index,:new]
+  # before_action :authenticate_user! ,only: [:index,:new]
 
   def index
     @reservations = Reservation.all.order(date: "ASC" ,time: "ASC")
