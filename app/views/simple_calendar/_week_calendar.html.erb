@@ -2,9 +2,9 @@
   <div class="calendar-heading">
     <%= link_to t('simple_calendar.previous', default: '前の週へ'), calendar.url_for_previous_view %>
     <% if calendar.number_of_weeks == 1 %>
-      <span class="calendar-title"><%= t('simple_calendar.week', default: '１週間') %> </span>
+      <span class="calendar-title"><%= t('simple_calendar.week', default: '| １週間 |') %> </span>
     <% else %>
-      <span class="calendar-title"><%= t('simple_calendar.week', default: '１週間') %> </span>
+      <span class="calendar-title"><%= t('simple_calendar.week', default: '| １週間 |') %> </span>
     <% end %>
     <%= link_to t('simple_calendar.next', default: '次の週へ'), calendar.url_for_next_view %>
        <!-- ポイント -->
@@ -12,11 +12,11 @@
   </div>
 
   <table class="table table-striped "> 
-    <thead>
+    <thead class="thead-dark">
       <tr>
         <th>時間</th>
         <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+          <th class="text-center"><%= t('date.abbr_day_names')[day.wday] %></th>
         <% end %>
       </tr>
     </thead>
@@ -39,14 +39,15 @@
         <%# なぜここはメソッド名で良いのだろう？%>
         <% time_schedule.each do |time| %>
           <tr>
-            <td><%= time %></td>
+            <td class="text-center"><%= time %></td>
             <% week.each do |day| %> <!-- 最後にイコール消すこと-->
-              <td>
+              <td class="text-center">
                <!-- 追加 -->
                 <!-- ここから -->
                      <%# <% binding.pry%>
                  <% if day.wday == 0 %>
-                 <%= "-"%>
+                 
+                 <%= "-" %>
                  <% elsif check_reservation(reservations, day, time) %>
 
 
