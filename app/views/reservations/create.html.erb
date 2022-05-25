@@ -1,16 +1,42 @@
-<h1>申し込みが完了しました。</h1>
+<div class="container">
+      <div class="col-12 text-center title h1 border-bottom">
+      申し込みが完了しました。</div>
 
-<h3>申し込み日時</h3><br />
-<%= "#{@date_parse}"%><br />
-<%= "#{@time}"%>
-
-<h4>ご参加予定人数</h4>
-<%= @reservation.number_of_people.name%>
-<h4>面談形式</h4>
-<%= @reservation.style.name%>
-
-<h4>面談で相談したいこと</h4>
-<%= @reservation.question%>
-
-<%=link_to "マイページで申込状況を確認する", user_path(current_user.id) %><br />
-<%=link_to "空き状況ページに戻る", root_path %>
+ <% days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]%>
+    
+    <div class="h6">
+      <p><%=(@reservation.user.name_last_name)+" "+(@reservation.user.name_first_name)+" "%>様<p>
+      <p class="h6">保護者 様</p>
+    </div>
+    <div>
+    <br>
+    <p>この度は、ご面談のお申し込み、誠にありがとうございます。<br/>
+      以下の日時でお申し込みを受付いたしました。
+      <br>ご登録いただいておりますメールアドレスに申し込み完了メールをお送りしておりますのでご確認ください。</p>
+    <div>
+<table class="table-bordered mt-4 mb-4">
+  <thead>
+  <tr>【お申し込み内容】</tr>
+  </thead>
+  <tr>
+    <td class="bg-light">申し込み日時</td>
+    <td >
+    <%= "#{@date_parse}"+" "%><%= days[@reservation.date.wday]+" "%>
+    <%= "#{@time}"%></td>
+  </tr>
+  <tr>
+    <td class="bg-light">ご参加予定人数</td>
+    <td><%= @reservation.number_of_people.name%></td>
+  </tr>
+  <tr>
+    <td class="bg-light">面談形式</div>
+    <td><%= @reservation.style.name%><td>
+  </tr>
+  <tr>
+    <td class="bg-light">面談で相談したいこと</td>
+    <td><%= @reservation.question%></td>
+  </tr>
+</table>
+  <%=link_to "マイページで申込状況を確認する", user_path(current_user.id), class: 'btn btn-primary mx-auto d-block mt-4'%><br />
+  <%=link_to "空き状況ページに戻る", root_path %>
+</div>

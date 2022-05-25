@@ -1,55 +1,71 @@
-<div class="contents row">
+<%# <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
 
-<h2>申込詳細</h2>
+<div class="container mt-5">
 
-     <% if current_user.group_id == 2%>
-        <table>
-        <thead>
-          <tr>
-            <td>学年</td>
-            <td>生徒氏名</td>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-           <td><%= @reservation.user.grade.name %></td>
-           <td><%= (@reservation.user.name_last_name)+(@reservation.user.name_first_name) %></td>
-          </tr>
-        </tbody>
+  <div class="h2 mt-5">申込詳細</div>
+
+      <% if current_user.group_id == 2%>
+          <table>
+          <thead>
+            <tr>
+              <td>学年</td>
+              <td>生徒氏名</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <td><%= @reservation.user.grade.name %></td>
+            <td><%= (@reservation.user.name_last_name)+(@reservation.user.name_first_name) %></td>
+            </tr>
+          </tbody>
+        <% end %>
+    <table class="table">
+      <thead>
+        <tr>
+          <td class="bg-light">お日にち</td>
+          <td class="bg-light">時間</td>
+          <td class="bg-light">面談形式</td>
+          <td class="bg-light">ご参加予定人数</td>
+        </tr>
+      </thead>
+      <tbody>
+  
+        <tr>
+          <td><%= @reservation.date.strftime("%Y年%m月%d日")%></td>
+          <td><%= @reservation.time%></td>
+          <td><%= @reservation.style.name%></td>
+          <td><%= @reservation.number_of_people.name%></td>
+        </tr>
+        <tr>
+          <td colspan="4" class="bg-light">面談で相談したいこと</td>
+        </tr>
+        <tr>
+          <td colspan="4"><%= @reservation.question%></td>
+        </tr>
+        <br />
+      </tbody>
+    </table>
+    <% if current_user.group_id != 2%>
+    <div class="d-flex ">
+      <div class="col-6 d-inline-flex ">
+        <p class ="u-ta-center">＼
+          <strong class="p-article_trialLessonStrong ">面談形式・ご参加人数変更の場合はこちら</strong>／</p>
+          <div class="btn btn-success">
+          <%= link_to "編集",edit_reservation_path(@reservation.id), class:"text-white"%>
+          </div>
+      </div>
+      <div class="col-6 d-inline-flex ">
+          <p class ="u-ta-center">＼
+          <strong class="p-article_trialLessonStrong col-6">日時変更の場合はこちら</strong>／ <br>※削除後、再申込してください。</p>
+          <div class="btn btn-danger">
+            <%= link_to   "削除",reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }, class:"text-white"%>
+        </div>
+      </div>
+    </div>
       <% end %>
-  <table>
-    <thead>
-      <tr>
-        <td>お日にち</td>
-        <td>時間</td>
-        <td>面談形式</td>
-        <td>ご参加予定人数</td>
-      
-      </tr>
-    </thead>
-    <tbody>
- 
-      <tr>
-        <td><%= @reservation.date.strftime("%Y年%m月%d日")%></td>
-        <td><%= @reservation.time%></td>
-        <td><%= @reservation.style.name%></td>
-        <td><%= @reservation.number_of_people.name%></td>
-      </tr>
-      <tr>
-        <td>面談で相談したいこと</td>
-      </tr>
-      <tr>
-        <td><%= @reservation.question%></td>
-      </tr>
-      <br />
-    </tbody>
-  </table>
-  <% if current_user.group_id != 2%>
-    <p>面談形式・ご参加人数変更の場合はこちら</p>
-    <%= link_to "編集",edit_reservation_path(@reservation.id)%>
-    <p>日時変更の場合はこちら※削除後、再申込してください。</p>
-    <%= link_to "削除",reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }%>
-  <% end %>
-  <br />
-  <%=link_to "マイページに戻る", user_path(current_user.id) %>
+    <%# </div> %>
+    <br />
+    <div class="text-right">
+     <%=link_to "マイページに戻る", user_path(current_user.id) %>
+    </div>
 </div>

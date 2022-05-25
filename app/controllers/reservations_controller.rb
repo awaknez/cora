@@ -1,16 +1,16 @@
 class ReservationsController < ApplicationController
-  # before_action :authenticate_user! ,only: [:index,:new]
+  before_action :authenticate_user! ,only: [:index,:new]
 
   def index
     @reservations = Reservation.all.order(date: "ASC" ,time: "ASC")
         #  binding.pry
-
   end
 
    def new
      @reservation = Reservation.new
      @date = params[:date]
      @time = params[:time]
+     @date_wday = Date.strptime(@date, '%Y-%m-%d').wday
      @start_time = DateTime.parse(@date + " " + @time + " " +"JST")
    end
 
