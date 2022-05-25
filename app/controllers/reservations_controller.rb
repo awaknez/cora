@@ -47,6 +47,7 @@ class ReservationsController < ApplicationController
 
  def destroy
   reservation = Reservation.find(params[:id])
+  ReservationMailer.sendmail_when_delete(reservation).deliver
   reservation.destroy
   redirect_to user_path(reservation.user_id)
  end
