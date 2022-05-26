@@ -1,6 +1,6 @@
 <%# <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
 
-<div class="container mt-5">
+<div class="container col-12 mt-5">
 
   <div class="h2 mt-5">申込詳細</div>
 
@@ -47,19 +47,23 @@
     </table>
     <% if current_user.group_id != 2%>
     <div class="d-flex ">
-      <div class="col-6 d-inline-flex ">
+      <div class="col-6 ">
         <p class ="u-ta-center">＼
-          <strong class="p-article_trialLessonStrong ">面談形式・ご参加人数変更の場合はこちら</strong>／</p>
-          <div class="btn btn-success">
-          <%= link_to "編集",edit_reservation_path(@reservation.id), class:"text-white"%>
-          </div>
+          <strong class="p-article_trialLessonStrong col-6">面談形式・ご参加人数変更はこちら</strong>／</p><p class="col-sm-none text-white">※※削除後、再申込してください。</p>
+            <div >
+              <%= link_to edit_reservation_path(@reservation.id), class:" text-white" do%>
+                <div class="btn btn-success btn-block">編集</div>
+              <% end %>
+            </div>
       </div>
-      <div class="col-6 d-inline-flex ">
-          <p class ="u-ta-center">＼
-          <strong class="p-article_trialLessonStrong col-6">日時変更の場合はこちら</strong>／ <br>※削除後、再申込してください。</p>
-          <div class="btn btn-danger">
-            <%= link_to   "削除",reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }, class:"text-white"%>
-        </div>
+      <div class="col-6">
+        <p class ="u-ta-center">＼
+          <strong class="p-article_trialLessonStrong col-6">日時変更の場合はこちら</strong>／ </p><p>※削除後、再申込してください。</p>
+          <div>
+            <%= link_to reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }, class:"text-white" do%>
+              <div class="btn btn-danger btn-block">削除</div>
+            <% end %>
+          </div>
       </div>
     </div>
       <% end %>
