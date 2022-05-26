@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user! ,only: [:index,:new]
+  # before_action :set_beginning_of_week,only: [:index]
 
   def index
     @reservations = Reservation.all.order(date: "ASC" ,time: "ASC")
@@ -56,5 +57,9 @@ class ReservationsController < ApplicationController
   def reservation_params
     params.require(:reservation).permit(:date,:time,:start_time,:style_id,:number_of_people_id,:question).merge(user_id:current_user.id)
   end
+
+  # def set_beginning_of_week
+  #   Date.beginning_of_week = :sunday
+  # end
 
 end

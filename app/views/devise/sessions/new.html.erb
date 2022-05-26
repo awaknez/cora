@@ -1,42 +1,47 @@
-<div class="container bg-light pb-5">
-  <%= form_with model:@user, url: user_session_path, id: 'registration-main', class:'form-horizontal', local: true do |f| %>
-  <div class="container bg-white pt-5">
-    <div class='form-wrap'>
-      <div class='form-header'>
-        <h1 class='form-header-text'>
-          ユーザー情報入力
-        </h1>
-      </div>
+  <%= form_with model:@user, url: user_session_path, id: 'registration-main', class:'registration-main', local: true do |f| %>
+
+<div class='form-wrap'>
+  <div class='form-header'>
+    <h1 class='form-header-text'>
+      ユーザー情報入力
+    </h1>
+  </div>
+  <div class='login-flash-message'>
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label >メールアドレス</label>
+      <span class="indispensable">必須</span>
     </div>
-    <div class='login-flash-message'>
-        <%= flash[:notice] %>
-        <%= flash[:alert] %>
+    <%= f.email_field :email, class:"input-default", id:"email", placeholder:"PC・携帯どちらでも可", autofocus: true %>
+  </div>
+  <div class="form-group">
+    <div class='form-text-wrap'>
+      <label >パスワード</label>
+      <span class="indispensable">必須</span>
     </div>
-        <div class="form-group">
-            <label class="form-text border-bottom mt-3">メールアドレス</label>
-            <div>
-              <%= f.email_field :email, class:"input-default", id:"email", placeholder:"PC・携帯どちらでも可", autofocus: true %>
-            </div>
-        </div>
-        <div class="form-group mt-3">
-          <div class='form-text-wrap'>
-            <label class="form-text border-bottom ">パスワード</label>
-          </div>
-            <%= f.password_field :password, class:"input-default", id:"password", placeholder:"登録したパスワードを入力してください" %>
-        </div>
-        <div class='login-btn'>
-          <%= f.submit "ログイン" ,class:"btn btn-primary" %>
-        </div>
-  <% end %>
+    <%= f.password_field :password, class:"input-default", id:"password", placeholder:"登録したパスワードを入力" %>
+  </div>
+  <div class='login-btn'>
+    <%= f.submit "ログイン" ,class:"login-blue-btn " %>
+  </div>
+  <div class="actions_to_registration">
+    <%= link_to "新規登録はこちら", new_registration_path(resource_name)%>
+  </div>
+</div>
+
+<% end %>
 
     <%# <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%# <div class="field">
-        <%= f.label :email %><br />
+        <%= f.label :email %>
         <%# <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
       <%# </div>
 
       <div class="field">
-        <%= f.label :password %><br />
+        <%= f.label :password %>
         <%# <%= f.password_field :password, autocomplete: "current-password" %>
       <%# </div> %>
 
@@ -51,6 +56,3 @@
         <%# <%= f.submit "ログイン" %> 
       <%# </div> %>
     <%# <% end %>
-    <%= render "devise/shared/links" %>
-  </div>
-</div>

@@ -12,6 +12,7 @@
   </div>
 
   <table class="table table-striped "> 
+  <%# table-striped %>
     <thead class="thead-dark">
       <tr>
         <th>時間</th>
@@ -40,8 +41,16 @@
         <% time_schedule.each do |time| %>
           <tr>
             <td class="text-center"><%= time %></td>
-            <% week.each do |day| %> <!-- 最後にイコール消すこと-->
-              <td class="text-center">
+            <% week.each do |day| %> 
+            <!-- 土日であれば背景色変更-->
+
+               <% if day.wday == 0 %>
+                <td class="text-center wday-0">
+               <% elsif day.wday == 6%>
+                 <td class="text-center wday-6">
+               <% else %>
+                <td class="text-center">
+               <% end %>
                <!-- 追加 -->
                 <!-- ここから -->
                      <%# <% binding.pry%>

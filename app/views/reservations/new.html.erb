@@ -19,30 +19,34 @@
             <%= form.text_field :time, class: 'form-control',  value: @time, readonly: true %>
           </div>
           <div class="form">
-            <div class="weight-bold-text">
-              ご参加予定人数
-              <span class="indispensable bg-warning bg-opacity-50 text-dark border h6 rounded">必須</span>
-            </div>
-            <div class="dropdown">
-              <%= form.collection_select(:number_of_people_id, NumberOfPeople.all, :id, :name, {}, {class:"form-control", id:"nuber_of_people-category"}) %><br />
-              <%# select-box %>
-            </div>
-            <div class="weight-bold-text">
-              面談形式（お選びください）
-              <span class="indispensable bg-warning bg-opacity-50 text-dark border h6 rounded">必須</span>
-            </div>
-            <%= form.collection_select(:style_id, Style.all, :id, :name, {}, {class:"form-control", id:"style-category"}) %><br />
-            <div class="weight-bold-text">
-              面談で相談したいこと（任意）
+            <div class="form-group">
+              <div class="weight-bold-text">
+                ご参加予定人数
+                <span class="indispensable  ">必須</span>
+              </div>
+                <div class="dropdown">
+                  <%= form.collection_select(:number_of_people_id, NumberOfPeople.all, :id, :name, {}, {class:"select-box", id:"nuber_of_people-category"}) %><br />
+                </div>
+              </div>
             </div>
             <div class="form-group">
-            <%= form.text_area :question, class:"form-control", id:"pre-question", placeholder:"面談にて相談したいことがございましたら事前にご記入ください。",rows:"7" ,maxlength:"1000"%>
+              <div class="weight-bold-text">
+                面談形式（お選びください）
+                <span class="indispensable  ">必須</span>
+              </div>
+              <%= form.collection_select(:style_id, Style.all, :id, :name, {}, {class:"select-box", id:"style-category"}) %><br />
+            </div>
+            <div class="form-group">
+              <div class="weight-bold-text">
+                備考・面談で相談したいこと（任意）
+              </div>
+              <%= form.text_area :question, class:"question-input", id:"pre-question", placeholder:"面談でご相談したいことや備考がございましたらご記入ください。", rows:"7" ,maxlength:"1000"%>
             </div>
 
           <%# <%= form.hidden_field :user_id, value: current_user.id %>
           <%= form.hidden_field :start_time, value: @start_time %>
           <div class="submit">
-            <%= form.submit value: '予約する', class: 'btn btn-primary mx-auto d-block' %>
+            <%= form.submit value: '予約する', class: 'btn mx-auto d-block common-btn' %>
           </div>
         <% end %>
     <%# </div> %>
