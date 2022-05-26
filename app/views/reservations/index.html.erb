@@ -1,13 +1,14 @@
-
+<header>
 <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
-
-<div class="container pt-5">
-  <div class="row">
+</header>
+<body>
+<%# <div class="container pt-5"> %>
+  <div class="table_row">
 
 <!--ここからカレンダー-->
     <div class="col-12 mt-3 text-right">
 
-        <div class="col-12 mt-3 text-right">
+        <div class="col-md-12 mt-3">
             <%= week_calendar events: @reservations do |date, reservations| %>
               <%= date.day %>
             <% end %>
@@ -15,4 +16,5 @@
         </div>
     </div>
   </div>
-</div>
+<%# </div> %>
+</body>
