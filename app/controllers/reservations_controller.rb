@@ -39,7 +39,7 @@ class ReservationsController < ApplicationController
   @reservation = Reservation.find(params[:id])
   @date_parse = @reservation.date.strftime("%Y年%m月%d日")
   @time = @reservation.time
-  ReservationMailer.sendmail_when_reserve(@reservation).deliver
+  ReservationMailer.sendmail_when_edit(@reservation).deliver
   unless @reservation.update(reservation_params)
     render :edit
   end
@@ -47,6 +47,7 @@ class ReservationsController < ApplicationController
 
  def destroy
   reservation = Reservation.find(params[:id])
+  ReservationMailer.sendmail_when_delete(reservation).deliver
   reservation.destroy
   redirect_to user_path(reservation.user_id)
  end
