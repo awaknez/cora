@@ -21,7 +21,7 @@
           <div class="form">
             <div class="weight-bold-text">
               ご参加予定人数
-              <span class="indispensable bg-warning bg-opacity-50 text-dark border h6 rounded">必須</span>
+              <span class="indispensable  ">必須</span>
             </div>
             <div class="dropdown">
               <%= form.collection_select(:number_of_people_id, NumberOfPeople.all, :id, :name, {}, {class:"form-control", id:"nuber_of_people-category"}) %><br />
@@ -29,7 +29,7 @@
             </div>
             <div class="weight-bold-text">
               面談形式（お選びください）
-              <span class="indispensable bg-warning bg-opacity-50 text-dark border h6 rounded">必須</span>
+              <span class="indispensable  ">必須</span>
             </div>
             <%= form.collection_select(:style_id, Style.all, :id, :name, {}, {class:"form-control", id:"style-category"}) %><br />
             <div class="weight-bold-text">
