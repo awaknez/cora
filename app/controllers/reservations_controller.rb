@@ -50,6 +50,7 @@ class ReservationsController < ApplicationController
   reservation = Reservation.find(params[:id])
   ReservationMailer.sendmail_when_delete(reservation).deliver
   reservation.destroy
+  flash[:success] = "予約を削除しました。"
   redirect_to user_path(reservation.user_id)
  end
 
