@@ -60,8 +60,10 @@
               <!-- 追加 -->
                 <!-- ここから -->
                   <%# <% binding.pry%>
-              <% if day.wday == 0 || (day < Date.current)%>
+              <% if day.wday == 0 || (day < Date.current) || (time < Time.new) %>
                 <%= "-" %>
+              <% elsif day == Date.current %>
+                <i class="fas fa-phone"></i>
               <% elsif check_reservation(reservations, day, time) %>
                 <%= '×' %>
               <% else %>
