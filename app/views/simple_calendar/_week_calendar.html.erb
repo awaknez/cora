@@ -7,17 +7,23 @@
       <span class="calendar-title"><%= t('simple_calendar.week', default: '| １週間 |') %> </span>
     <% end %>
     <%= link_to t('simple_calendar.next', default: '次の週へ'), calendar.url_for_next_view %>
-       <!-- ポイント -->
-     <% reservations = Reservation.reservations_after_three_month %>
+      <!-- ポイント -->
+    <% reservations = Reservation.reservations_after_three_month %>
   </div>
 
   <table class="table table-striped "> 
   <%# table-striped %>
-    <thead class="thead-dark">
+    <thead class="thead">
       <tr>
-        <th>時間</th>
+        <th class="text-center bg-dark text-white">時間</th>
         <% date_range.slice(0, 7).each do |day| %>
-          <th class="text-center"><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% if day.wday == 0 %>
+          <th class="text-center wday-0"><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% elsif day.wday == 6%>
+          <th class="text-center wday-6"><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% else %>
+          <th class="text-center bg-dark text-white"><%= t('date.abbr_day_names')[day.wday] %></th>
+          <% end %>
         <% end %>
       </tr>
     </thead>
@@ -44,26 +50,23 @@
             <% week.each do |day| %> 
             <!-- 土日であれば背景色変更-->
 
-               <% if day.wday == 0 %>
+              <% if day.wday == 0 %>
                 <td class="text-center wday-0">
-               <% elsif day.wday == 6%>
-                 <td class="text-center wday-6">
-               <% else %>
+              <% elsif day.wday == 6%>
+                <td class="text-center wday-6">
+              <% else %>
                 <td class="text-center">
-               <% end %>
-               <!-- 追加 -->
+              <% end %>
+              <!-- 追加 -->
                 <!-- ここから -->
-                     <%# <% binding.pry%>
-                 <% if day.wday == 0 %>
-                 
-                 <%= "-" %>
-                 <% elsif check_reservation(reservations, day, time) %>
-
-
-                   <%= '×' %>
-                 <% else %>
-                   <%= link_to '○', new_reservation_path(date: day, time: time) %>
-                 <% end %>
+                  <%# <% binding.pry%>
+              <% if day.wday == 0 || (day < Date.current)%>
+                <%= "-" %>
+              <% elsif check_reservation(reservations, day, time) %>
+                <%= '×' %>
+              <% else %>
+                <%= link_to '○', new_reservation_path(date: day, time: time) %>
+              <% end %>
                 <!-- ここまで -->
               </td>
             <% end %>
