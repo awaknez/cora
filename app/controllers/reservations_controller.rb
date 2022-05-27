@@ -40,9 +40,12 @@ class ReservationsController < ApplicationController
   @reservation = Reservation.find(params[:id])
   @date_parse = @reservation.date.strftime("%Y年%m月%d日")
   @time = @reservation.time
-  ReservationMailer.sendmail_when_edit(@reservation).deliver
-  unless @reservation.update(reservation_params)
+  if (reservation_params[:style_id].to_i == @reservation.style_id) && (reservation_params[:number_of_people_id].to_i == @reservation.number_of_people_id)
+    flash.now[:danger] = "ご参加予定人数もしくは面談形式を変更してください。"
     render :edit
+  else
+    @reservation.update(reservation_params)
+    ReservationMailer.sendmail_when_edit(@reservation).deliver
   end
  end
 
