@@ -5,6 +5,14 @@ class Reservation < ApplicationRecord
   belongs_to :style
   belongs_to :user
 
+  with_options presence: true do
+    validates :date  
+    validates :time   
+    validates :style_id,             numericality: { other_than: 1 ,message: "can't be blank"}
+    validates :numberof_people_id,   numericality: { other_than: 1 ,message: "can't be blank"}
+    validates :user_id
+  end
+
   def self.reservations_after_three_month
     # 今日から3ヶ月先までのデータを取得
     # 下記の”date>=?”のdateはカラム名
