@@ -171,3 +171,11 @@
   width:50%;
   margin:0 auto;
 }
+
+.error-alert{
+  display: flex;
+}
+.error-alert ul{
+  color:red;
+  margin: 0 auto;
+}
