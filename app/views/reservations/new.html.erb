@@ -9,10 +9,11 @@
     <%# <div class="wrap-fluid"> %>
         <div class="col-12 mt-3 content">
           <%= form_with model: @reservation, local: true, class: 'form' do |form| %>
-          <%# <%= render 'layouts/error_messages', model: form.object %>
+          <%= render 'devise/shared/error_messages', model: form.object %>
           <div class="day form-group">
             <%= form.label :date, '日付' %>
-            <%= form.text_field :date, class: 'form-control', value: "#{@date}"+" #{days[@date_wday]}", readonly: true %>
+            <%= form.text_field :date, class: 'form-control', value: @date, readonly: true %>
+            <%# <p><%="#{days[@date_wday]}"%>
           </div>
           <div class="time form-group">
             <%= form.label :time, '時間' %>
@@ -49,7 +50,6 @@
             <%= form.submit value: '予約する', class: 'btn mx-auto d-block common-btn' %>
           </div>
         <% end %>
-    <%# </div> %>
     <div class="col-12 text-right">
       <%= link_to '戻る', reservations_path %>
     </div>

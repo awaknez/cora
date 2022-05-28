@@ -8,9 +8,9 @@ class Reservation < ApplicationRecord
   with_options presence: true do
     validates :date  
     validates :time   
+    validates :start_time
     validates :style_id,             numericality: { other_than: 1 ,message: "can't be blank"}
-    validates :numberof_people_id,   numericality: { other_than: 1 ,message: "can't be blank"}
-    validates :user_id
+    validates :number_of_people_id,  numericality: { other_than: 1 ,message: "can't be blank"}
   end
 
   def self.reservations_after_three_month
@@ -27,6 +27,6 @@ class Reservation < ApplicationRecord
       reservation_data.push(reservations_hash)
     end
     reservation_data
-   end
+  end
 
 end
