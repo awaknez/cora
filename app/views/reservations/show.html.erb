@@ -45,7 +45,6 @@
         <br />
       </tbody>
     </table>
-    <% if current_user.group_id != 2%>
     <div class="d-flex ">
       <div class="col-6 ">
         <p class ="u-ta-center">＼
@@ -66,10 +65,8 @@
           </div>
       </div>
     </div>
-      <% end %>
-    <%# </div> %>
     <br />
     <div class="text-right">
-     <%=link_to "マイページに戻る", user_path(current_user.id) %>
+    <%=link_to "マイページに戻る", user_path(current_user.id) %>
     </div>
 </div>

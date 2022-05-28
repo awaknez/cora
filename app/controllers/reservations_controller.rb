@@ -1,20 +1,19 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user! ,only: [:index,:new]
   # before_action :set_beginning_of_week,only: [:index]
+  before_action :if_admin,only:[:index]
 
   def index
     @reservations = Reservation.all.order(date: "ASC" ,time: "ASC")
-        #  binding.pry
   end
 
-   def new
-     @reservation = Reservation.new
-     @date = params[:date]
-     @time = params[:time]
-     @date_wday = Date.strptime(@date, '%Y-%m-%d').wday
-     @start_time = DateTime.parse(@date + " " + @time + " " +"JST")
-
-   end
+  def new
+    @reservation = Reservation.new
+    @date = params[:date]
+    @time = params[:time]
+    @date_wday = Date.strptime(@date, '%Y-%m-%d').wday
+    @start_time = DateTime.parse(@date + " " + @time + " " +"JST")
+  end
 
   def create
     @reservation = Reservation.new(reservation_params)
@@ -49,7 +48,7 @@ class ReservationsController < ApplicationController
     render :edit
   else
     @reservation.update(reservation_params)
-    ReservationMailer.sendmail_when_edit(@reservation).deliver
+    # ReservationMailer.sendmail_when_edit(@reservation).deliver
   end
  end
 
@@ -69,5 +68,11 @@ class ReservationsController < ApplicationController
   # def set_beginning_of_week
   #   Date.beginning_of_week = :sunday
   # end
+
+  def if_admin
+    if current_user.admin?
+      redirect_to admin_reservations_path 
+    end
+  end
 
 end
