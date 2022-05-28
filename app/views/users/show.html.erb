@@ -5,6 +5,9 @@
       <%# <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %>
       <div class="col-12 mt-3 text-center mx-auto">
         <h3>申込一覧</h3>
+          <% flash.each do |message_type, message| %>
+            <p class="flash_danger"><%= message %></p>
+          <% end %>
           <table class="table-striped col-12 mt-3 mx-auto">
             <thead class="border">
               <tr class="table_title">

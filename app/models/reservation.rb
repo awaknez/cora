@@ -5,6 +5,14 @@ class Reservation < ApplicationRecord
   belongs_to :style
   belongs_to :user
 
+  with_options presence: true do
+    validates :date  
+    validates :time   
+    validates :start_time
+    validates :style_id,             numericality: { other_than: 1 ,message: "を選んでください"}
+    validates :number_of_people_id,  numericality: { other_than: 1 ,message: "を選んでください"}
+  end
+
   def self.reservations_after_three_month
     # 今日から3ヶ月先までのデータを取得
     # 下記の”date>=?”のdateはカラム名
@@ -19,6 +27,6 @@ class Reservation < ApplicationRecord
       reservation_data.push(reservations_hash)
     end
     reservation_data
-   end
+  end
 
 end

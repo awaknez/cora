@@ -1,0 +1,14 @@
+ja:
+  activerecord:
+    attributes:
+      user:
+        name_first_name: 名前
+        name_first_name_kana: 名前カナ
+        name_last_name: 名字
+        name_last_name_kana: 名字カナ
+        school_id: 通っている教室
+        grade_id: 学年
+        class_id: 組
+      reservation:
+        style_id: 面談形式
+        number_of_people_id: ご参加予定人数

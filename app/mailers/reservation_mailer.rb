@@ -22,7 +22,7 @@ class ReservationMailer < ApplicationMailer
     @reservation = reservation
     mail(
       from: Rails.application.credentials.gmail[:address],
-      to:   '@reservation.user.email',
+      to:   @reservation.user.email,
       subject: '申込みの取り消しがありました'
     )
   end

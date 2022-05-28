@@ -13,16 +13,20 @@ class ReservationsController < ApplicationController
      @time = params[:time]
      @date_wday = Date.strptime(@date, '%Y-%m-%d').wday
      @start_time = DateTime.parse(@date + " " + @time + " " +"JST")
+
    end
 
   def create
     @reservation = Reservation.new(reservation_params)
     @date_parse = @reservation.date.strftime("%Y年%m月%d日")
     @time = @reservation.time
-    ReservationMailer.sendmail_when_reserve(@reservation).deliver
-    unless @reservation.save
+    # render先で日付を表示させるために必要
+    @date = @reservation.date
+    if @reservation.save
       # redirect_to root_path
-      # reservation_path(@reservation.id)
+      redirect_to user_path(current_user.id)
+      # ReservationMailer.sendmail_when_reserve(@reservation).deliver
+    else
       render :new
     end
   end
@@ -40,9 +44,12 @@ class ReservationsController < ApplicationController
   @reservation = Reservation.find(params[:id])
   @date_parse = @reservation.date.strftime("%Y年%m月%d日")
   @time = @reservation.time
-  ReservationMailer.sendmail_when_edit(@reservation).deliver
-  unless @reservation.update(reservation_params)
+  if (reservation_params[:style_id].to_i == @reservation.style_id) && (reservation_params[:number_of_people_id].to_i == @reservation.number_of_people_id)
+    flash.now[:danger] = "ご参加予定人数もしくは面談形式を変更してください。"
     render :edit
+  else
+    @reservation.update(reservation_params)
+    ReservationMailer.sendmail_when_edit(@reservation).deliver
   end
  end
 
@@ -50,6 +57,7 @@ class ReservationsController < ApplicationController
   reservation = Reservation.find(params[:id])
   ReservationMailer.sendmail_when_delete(reservation).deliver
   reservation.destroy
+  flash[:success] = "予約を削除しました。"
   redirect_to user_path(reservation.user_id)
  end
 
