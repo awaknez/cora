@@ -1,0 +1,20 @@
+<%# <header>
+<%= render partial: "shared/header", locals:{ reservation: @reservation}%>
+<%# </header>  %>
+<body>
+<%# <div class="container pt-5"> %>
+  <div class="table_row">
+
+<!--ここからカレンダー-->
+    <div class="col-12 mt-3 text-right">
+      <%= month_calendar events: @reservations do |date, reservations| %>
+          <%= date.day %>
+          <% reservations.each do |reservation|%>
+            <div class="reserve_content">
+            <%= link_to "#{(reservation.time)+' '+(reservation.user.grade.name)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", admin_reservation_path(reservation.id)%>
+            </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</body>

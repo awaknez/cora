@@ -8,7 +8,7 @@ class Reservation < ApplicationRecord
   with_options presence: true do
     validates :date  
     validates :time   
-    validates :start_time
+    # validates :start_time
     validates :style_id,             numericality: { other_than: 1 ,message: "を選んでください"}
     validates :number_of_people_id,  numericality: { other_than: 1 ,message: "を選んでください"}
   end
