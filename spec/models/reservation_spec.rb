@@ -51,12 +51,12 @@ RSpec.describe Reservation, type: :model do
       it "面談形式の選択においてid:1(---)を選択すると申し込みできない" do
         @reservation.style_id = "1"
         @reservation.valid?
-        expect(@reservation.errors.full_messages).to include ("Style can't be blank")
+        expect(@reservation.errors.full_messages).to include ("Style を選んでください")
       end
       it "参加人数の選択においてid:1(---)を選択すると申し込みできない" do
         @reservation.number_of_people_id = "1"
         @reservation.valid?
-        expect(@reservation.errors.full_messages).to include ("Number of people can't be blank")
+        expect(@reservation.errors.full_messages).to include ("Number of people を選んでください")
       end
     end
 

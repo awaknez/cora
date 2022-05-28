@@ -121,7 +121,7 @@ RSpec.describe User, type: :model do
       it "教室名の選択においてid:1(---)を選択すると購入できない" do
         @user.school_id = 1
         @user.valid?
-        expect(@user.errors.full_messages).to include("School can't be blank")
+        expect(@user.errors.full_messages).to include("School を選んでください")
       end
       it "grade_idが空だと購入（保存）できない" do
         @user.grade_id = nil
@@ -131,7 +131,7 @@ RSpec.describe User, type: :model do
       it "学年の選択においてid:1(---)を選択すると購入できない" do
         @user.grade_id = 1
         @user.valid?
-        expect(@user.errors.full_messages).to include("Grade can't be blank")
+        expect(@user.errors.full_messages).to include("Grade を選んでください")
       end
       it "class_idが空だと購入（保存）できない" do
         @user.class_id = ""
@@ -141,7 +141,7 @@ RSpec.describe User, type: :model do
       it "組の選択においてid:1(---)を選択すると購入できない" do
         @user.class_id = 1
         @user.valid?
-        expect(@user.errors.full_messages).to include("Class can't be blank")
+        expect(@user.errors.full_messages).to include("Class を選んでください")
       end
       it "group_idが空だと購入（保存）できない" do
         @user.group_id = ""
