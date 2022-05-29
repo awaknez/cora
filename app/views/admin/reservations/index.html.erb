@@ -4,6 +4,9 @@
 <body>
 <%# <div class="container pt-5"> %>
       <h3>申込一覧</h3>
+      <ul>
+      <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout " %></li>
+      </ul>
       <button type="button" class="btn btn-outline-secondary" id="switchbtn-index">一覧表示のみ</button>
       <button type="button" class="btn btn-outline-secondary" id="switchbtn-calendar">カレンダー表示のみ</button>
       <button type="button" class="btn btn-outline-secondary" id="switchbtn-both">一覧・カレンダー表示</button>
