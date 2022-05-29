@@ -4,7 +4,11 @@
 <body>
 <%# <div class="container pt-5"> %>
       <h3>申込一覧</h3>
-        <table class="table-striped col-12 mt-3 mx-auto">
+      <button type="button" class="btn btn-outline-secondary" id="switchbtn-index">一覧表示のみ</button>
+      <button type="button" class="btn btn-outline-secondary" id="switchbtn-calendar">カレンダー表示のみ</button>
+      <button type="button" class="btn btn-outline-secondary" id="switchbtn-both">一覧・カレンダー表示</button>
+
+        <table class="table-striped col-12 mt-3 mx-auto" id ="reservation-index">
           <thead class="border">
             <tr class="table_title">
               <td>お日にち</td>
@@ -34,9 +38,9 @@
             <% end %>
             </tbody>
         </table>
-  <div class="table_row">
+  <div class="table_row" >
 <!--ここからカレンダー-->
-    <div class="col-12 mt-3 text-right">
+    <div class="col-12 mt-3 text-right" id="reservation-month-calendar">
       <%= month_calendar events: @reservations do |date, reservations| %>
           <%= date.day %>
           <% reservations.each do |reservation|%>
