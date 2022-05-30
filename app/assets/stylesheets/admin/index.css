@@ -4,3 +4,8 @@
   white-space: nowrap;
   text-align: left;
 }
+
+.reservation_contant{
+  list-style: none;
+  text-align: left;
+}

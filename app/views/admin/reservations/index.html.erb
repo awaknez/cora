@@ -3,18 +3,78 @@
 <%# </header>  %>
 <body>
 <%# <div class="container pt-5"> %>
-  <div class="table_row">
+      <h3>申込一覧</h3>
+      <ul>
+      <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout " %></li>
+      </ul>
+      <button type="button" class="btn btn-outline-secondary" id="switchbtn-index">一覧表示のみ</button>
+      <button type="button" class="btn btn-outline-secondary" id="switchbtn-calendar">カレンダー表示のみ</button>
+      <button type="button" class="btn btn-outline-secondary" id="switchbtn-both">一覧・カレンダー表示</button>
 
+        <table class="table-striped col-12 mt-3 mx-auto" id ="reservation-index">
+          <thead class="border">
+            <tr class="table_title">
+              <td>お日にち</td>
+              <td>時間</td>
+              <td>学年</td>
+              <td>生徒氏名</td>
+              <td>面談形式</td>
+              <td>ご参加予定人数</td>
+              <td>申込の<br>詳細</td>
+              <td>申込の<br>編集</td>
+              <td>申込の<br>削除</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reservations.each do |reservation| %>
+            <tr>
+            <td><%= reservation.date.strftime("%m月%d日")%></td>
+            <td><%= reservation.time%></td>
+            <td><%= reservation.user.grade.name%></td>
+            <td><%= reservation.user.name_last_name + reservation.user.name_first_name%></td>
+            <td><%= reservation.style.name%></td>
+            <td><%= reservation.number_of_people.name%></td>
+            <td><%= link_to "詳細",admin_reservation_path(reservation.id)%></td>
+            <td><%= link_to "編集",edit_admin_reservation_path(reservation.id)%></td>
+            <td><%= link_to "削除",admin_reservation_path(reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }%></td>
+            </tr>
+            <% end %>
+            </tbody>
+        </table>
+  <div class="table_row" >
 <!--ここからカレンダー-->
-    <div class="col-12 mt-3 text-right">
+    <div class="col-12 mt-3 text-right" id="reservation-month-calendar">
+
       <%= month_calendar events: @reservations do |date, reservations| %>
           <%= date.day %>
           <% reservations.each do |reservation|%>
             <div class="reserve_content">
-            <%= link_to "#{(reservation.time)+' '+(reservation.user.grade.name)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", admin_reservation_path(reservation.id)%>
+              <%= link_to "#{(reservation.time)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", admin_reservation_path(reservation.id)%>
             </div>
+
           <% end %>
       <% end %>
     </div>
   </div>
 </body>
+<%# 
+              <div class="content-list">
+                <ul class="hidden">
+                  <li><%= reservation.date.strftime("%m月%d日")</li>
+                  <li><%= reservation.time</li>
+                  <li><%= reservation.user.grade.name</li>
+                  <li><%= reservation.user.name_last_name + reservation.user.name_first_name</li>
+                  <li><%= reservation.style.name</li>
+                  <li><%= reservation.number_of_people.name</li>
+                  <li><%= link_to "詳細",admin_reservation_path(reservation.id)</li>
+                  <li><%= link_to "編集",edit_admin_reservation_path(reservation.id)</li>
+                  <li><%= link_to "削除",admin_reservation_path(reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }</li>
+                </ul>
+            </div> %>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    $('[data-toggle="popover"]').popover();
+  </script>
