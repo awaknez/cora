@@ -44,14 +44,37 @@
   <div class="table_row" >
 <!--ここからカレンダー-->
     <div class="col-12 mt-3 text-right" id="reservation-month-calendar">
+
       <%= month_calendar events: @reservations do |date, reservations| %>
           <%= date.day %>
           <% reservations.each do |reservation|%>
             <div class="reserve_content">
-            <%= link_to "#{(reservation.time)+' '+(reservation.user.grade.name)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", admin_reservation_path(reservation.id)%>
+              <%= link_to "#{(reservation.time)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", admin_reservation_path(reservation.id)%>
             </div>
+
           <% end %>
       <% end %>
     </div>
   </div>
 </body>
+<%# 
+              <div class="content-list">
+                <ul class="hidden">
+                  <li><%= reservation.date.strftime("%m月%d日")</li>
+                  <li><%= reservation.time</li>
+                  <li><%= reservation.user.grade.name</li>
+                  <li><%= reservation.user.name_last_name + reservation.user.name_first_name</li>
+                  <li><%= reservation.style.name</li>
+                  <li><%= reservation.number_of_people.name</li>
+                  <li><%= link_to "詳細",admin_reservation_path(reservation.id)</li>
+                  <li><%= link_to "編集",edit_admin_reservation_path(reservation.id)</li>
+                  <li><%= link_to "削除",admin_reservation_path(reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }</li>
+                </ul>
+            </div> %>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script>
+    $('[data-toggle="popover"]').popover();
+  </script>
