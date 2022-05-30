@@ -10,6 +10,7 @@
       <button type="button" class="btn btn-outline-secondary" id="switchbtn-index">一覧表示のみ</button>
       <button type="button" class="btn btn-outline-secondary" id="switchbtn-calendar">カレンダー表示のみ</button>
       <button type="button" class="btn btn-outline-secondary" id="switchbtn-both">一覧・カレンダー表示</button>
+      <button type="button" class="btn btn-secondary"><%= link_to 'csv出力', admin_reservations_path(format: :csv),class:"text-white" %></button>
 
         <table class="table-striped col-12 mt-3 mx-auto" id ="reservation-index">
           <thead class="border">
