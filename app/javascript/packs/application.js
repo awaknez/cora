@@ -8,7 +8,6 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("../switch")
-require("../modal")
 
 //= require jquery3
 //= require popper
