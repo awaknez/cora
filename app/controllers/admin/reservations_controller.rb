@@ -3,7 +3,6 @@ class Admin::ReservationsController < ApplicationController
 
   def index
     @reservations = Reservation.all.order(date: "ASC" ,time: "ASC")
-        #  binding.pry
   end
 
   def show
