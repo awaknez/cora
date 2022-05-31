@@ -20,7 +20,7 @@ module ReservationsHelper
   #   # 取得した予約データにdayとtimeが一致する場合はtrue,一致しない場合はfalseを返します
       if reservations_count > 1
          reservations.each do |reservation|
-           result = reservation[:date].eql?(day.strftime("%Y-%m-%d")) && reservation[:time].eql?(time)
+           result = reservation[:date].eql?(day) && reservation[:time].eql?(time)
            return result if result
          end
       elsif reservations_count == 1

@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("../switch")
+require("../time_input")
 
 //= require jquery3
 //= require popper

@@ -5,6 +5,7 @@
       新規予約画面
     </div>
     <% days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]%>
+    <% reservations = Reservation.reservations_after_three_month %>
 
     <%# <div class="wrap-fluid"> %>
         <div class="col-12 mt-3 content">
@@ -12,12 +13,31 @@
           <%= render 'devise/shared/error_messages', model: form.object %>
           <div class="day form-group">
             <%= form.label :date, '日付' %>
-            <%= form.text_field :date, class: 'form-control', value: @date, readonly: true %>
+            <%= form.text_field :date, class: 'form-control', id:"date_input", value: @date, readonly: true %>
             <%# <p><%="#{days[@date_wday]}"%>
           </div>
           <div class="time form-group">
-            <%= form.label :time, '時間' %>
-            <%= form.text_field :time, class: 'form-control',  value: @time, readonly: true %>
+          <table class="bordered table-hover" id="target-table">
+            <% time_schedule.each do |time| %>
+          <tr>
+            <td class="text-center time_index"><%= time %></td>
+            <td class="text-center reserve_index" id="reserve_index">
+              <% if @date == Date.current %>
+                <i class="fas fa-phone"></i>
+              <% elsif check_reservation(reservations, @date, time) %>
+              <% binding.pry %>
+                <%= '×' %>
+              <% else %>
+                <%= '○'%>
+              <% end %>
+                <!-- ここまで -->
+            </td>
+          </tr>
+        <% end %>
+    
+      </table>
+            <%= form.label :time, '開始時刻' %>
+            <%= form.text_field :time, class: 'form-control', readonly:true, id:"time_input" %>
           </div>
           <div class="form">
             <div class="form-group">
@@ -44,8 +64,8 @@
               <%= form.text_area :question, class:"question-input", id:"pre-question", placeholder:"面談でご相談したいことや備考がございましたらご記入ください。", rows:"7" ,maxlength:"1000"%>
             </div>
 
-          <%# <%= form.hidden_field :user_id, value: current_user.id %>
-          <%= form.hidden_field :start_time, value: @start_time %>
+          <%# <%= form.hidden_field :user_id, value: current_user.id ,value: @start_time%>
+          <%= form.hidden_field :start_time, readonly:true, value:@start_time,id:"start_time_input"%>
           <div class="submit">
             <%= form.submit value: '予約する', class: 'btn mx-auto d-block common-btn' %>
           </div>
@@ -55,4 +75,5 @@
     </div>
     </div>
   </div>
+
 </div>

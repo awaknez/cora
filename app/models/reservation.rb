@@ -7,7 +7,7 @@ class Reservation < ApplicationRecord
 
   with_options presence: true do
     validates :date  
-    validates :time   
+    validates :time   ,format: { with:/\A[\d]{2}:[\d]{2}\z/} #半角数字で時間を表現
     # validates :start_time
     validates :style_id,             numericality: { other_than: 1 ,message: "を選んでください"}
     validates :number_of_people_id,  numericality: { other_than: 1 ,message: "を選んでください"}

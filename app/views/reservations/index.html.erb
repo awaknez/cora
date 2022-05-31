@@ -1,20 +1,35 @@
 <header>
-<%= render partial: "shared/header", locals:{ reservation: @reservation}%>
+  <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
 </header>
 <body>
-<%# <div class="container pt-5"> %>
-  <div class="table_row">
-
 <!--ここからカレンダー-->
+  <div class="table_row">
     <div class="col-12 mt-3 text-right">
-
         <div class="col-md-12 mt-3">
             <%= week_calendar events: @reservations do |date, reservations| %>
               <%= date.day %>
             <% end %>
-        <%# <% end %>
         </div>
     </div>
   </div>
-<%# </div> %>
+  <div class="table_row">
+    <div class="col-12 mt-3 text-right">
+        <div class="col-md-12 mt-3">
+            <%= month_calendar events: @reservations do |date, reservations| %>
+              <%= date.day %>
+              <%= link_to "#{date.day}", new_reservation_path(date: date) %>
+            <% end %>
+        </div>
+
+        <table class="table table-striped">
+          <% time_schedule.each do |time| %>
+            <tr>
+              <td class="text-center"><%= time %></td>
+              <td class="bg-dark text-white"><%= time%></td>
+              <td class="bg-light"><%= time%></td>
+            </tr>
+          <% end %>
+        </table>
+    </div>
+  </div>
 </body>

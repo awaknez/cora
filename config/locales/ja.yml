@@ -12,3 +12,4 @@ ja:
       reservation:
         style_id: 面談形式
         number_of_people_id: ご参加予定人数
+        time: 開始時刻

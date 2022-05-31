@@ -12,7 +12,7 @@ class ReservationsController < ApplicationController
     @date = params[:date]
     @time = params[:time]
     @date_wday = Date.strptime(@date, '%Y-%m-%d').wday
-    @start_time = DateTime.parse(@date + " " + @time + " " +"JST")
+    @start_time = DateTime.parse(@date + " " + "JST")
   end
 
   def create
@@ -21,6 +21,7 @@ class ReservationsController < ApplicationController
     @time = @reservation.time
     # render先で日付を表示させるために必要
     @date = @reservation.date
+
     if @reservation.save
       # redirect_to root_path
       redirect_to user_path(current_user.id)
