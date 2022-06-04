@@ -13,6 +13,7 @@ class ReservationsController < ApplicationController
     @time = params[:time]
     @date_wday = Date.strptime(@date, '%Y-%m-%d').wday
     @start_time = DateTime.parse(@date + " " + "JST")
+    @student_name = (current_user.name_last_name) + " " + (current_user.name_first_name)
   end
 
   def create
@@ -21,45 +22,64 @@ class ReservationsController < ApplicationController
     @time = @reservation.time
     # render先で日付を表示させるために必要
     @date = @reservation.date
-
-    if @reservation.save
       # redirect_to root_path
-      redirect_to user_path(current_user.id)
       # ReservationMailer.sendmail_when_reserve(@reservation).deliver
-    else
-      render :new
+    if params[:back] || !@reservation.save
+      redirect_to root_path
+      # render :new and return
+    # else
+      # redirect_to user_path(current_user.id)
     end
   end
 
- def show
-  @reservation = Reservation.find(params[:id])
- end
-
- def edit
-  @reservation = Reservation.find(params[:id])
-
- end
-
- def update
-  @reservation = Reservation.find(params[:id])
-  @date_parse = @reservation.date.strftime("%Y年%m月%d日")
-  @time = @reservation.time
-  if (reservation_params[:style_id].to_i == @reservation.style_id) && (reservation_params[:number_of_people_id].to_i == @reservation.number_of_people_id)
-    flash.now[:danger] = "ご参加予定人数もしくは面談形式を変更してください。"
-    render :edit
-  else
-    @reservation.update(reservation_params)
-    # ReservationMailer.sendmail_when_edit(@reservation).deliver
+  def show
+    # 下記条件分岐でconfirm画面でリロードした際にトップページへ戻す設定
+    if params[:id] == "confirm"
+      redirect_to root_path
+    else
+      @reservation = Reservation.find(params[:id])
+    end
   end
- end
 
- def destroy
-  reservation = Reservation.find(params[:id])
-  ReservationMailer.sendmail_when_delete(reservation).deliver
-  reservation.destroy
-  flash[:success] = "予約を削除しました。"
-  redirect_to user_path(reservation.user_id)
- end
+  def edit
+    @reservation = Reservation.find(params[:id])
+
+  end
+
+  def update
+    @reservation = Reservation.find(params[:id])
+    @date_parse = @reservation.date.strftime("%Y年%m月%d日")
+    @time = @reservation.time
+    
+    if (reservation_params[:style_id].to_i == @reservation.style_id) && (reservation_params[:number_of_people_id].to_i == @reservation.number_of_people_id)
+      flash.now[:danger] = "ご参加予定人数もしくは面談形式を変更してください。"
+      render :edit
+    elsif  @reservation.update(reservation_params)
+      # ReservationMailer.sendmail_when_edit(@reservation).deliver
+    else  
+      flash.now[:alert] = "変更ができませんでした。"
+      render :edit
+    end
+  end
+
+  def destroy
+    reservation = Reservation.find(params[:id])
+    ReservationMailer.sendmail_when_delete(reservation).deliver
+    reservation.destroy
+    flash[:success] = "予約を削除しました。"
+    redirect_to user_path(reservation.user_id)
+  end 
+
+  def confirm
+      @reservation = Reservation.new(reservation_params)
+      # binding.pry
+
+      if @reservation.invalid?
+      # @date = @reservation.date
+      redirect_to root_path
+    # render :new
+      end
+  end
 
   private
   def reservation_params

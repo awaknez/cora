@@ -6,3 +6,47 @@
   background-color: #c396c3;
   color:white;
 }
+
+.time_index{
+  width: 20%;
+  height:50px ;
+  border-bottom: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+
+}
+
+.reserve_index{
+  font-size: 24px;
+  height:50px ;
+  border-bottom: 1px solid lightgray;
+}
+
+.target-table{
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+
+.back-btn{
+  text-align: center;
+  padding:10px 0;
+  margin: 10px auto;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+}
+
+.back-btn a{
+  font-size: 14px;
+}
+
+.td01:target {
+  background-color: red;
+}
+
+.submit p{
+  text-align: center;
+  font-size: 14px;
+  font-weight: 200;
+}

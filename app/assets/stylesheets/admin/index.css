@@ -9,3 +9,155 @@
   list-style: none;
   text-align: left;
 }
+
+.space{
+  height:30px;
+}
+
+.indispensable_2 {
+  background-color: #475D77;
+  margin-left: 8px;
+  padding: 3px;
+  border-radius: 2px;
+  color: rgba(255, 255, 255, 0.743);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.common-btn-2{
+  background-color: #475D77;
+  color:white;
+}
+
+.body-wrap{
+  display: flex;
+}
+
+.side-bar{
+  height: 100vh;
+  width:25%;
+  border-right: 1px solid white;
+  color: white;
+  background-color: #475D77;
+}
+
+.side-bar a{
+  color: white;
+}
+
+.side-bar-head{
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 10px 0 10px;
+}
+
+.title a{
+  font-size: 22px;
+}
+
+.admin_logout{
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  padding: 5px;
+}
+
+.logout a{
+  font-size: 14px;
+  vertical-align: middle;
+}
+.user-name{
+  margin: 10px 10px 0 10px;
+  border-bottom:1px solid white;
+}
+
+
+.switch-btn{
+  margin: 10px;
+}
+
+.main{
+  height: 100vh;
+  width: 75%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.main-head{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 100%;
+  color: white;
+  background-color: #475D77;
+}
+
+.main-head-left{
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: flex-end;
+}
+
+.switch-btns{
+  display: inline-flex;
+  margin-right:50px;
+}
+
+.main-body{
+  height: calc(100vh - 50px);
+  overflow: scroll;
+}
+
+.table-area{
+  width: 100%;
+  height: 60%;
+  overflow:scroll;
+}
+
+.calendar-area{
+  width: 100%;
+  height: 60%;
+  overflow: scroll;
+  position: relative;
+}
+.admin_table_row{
+  width:100%;
+  padding: 2px 5px 5px 5px;
+  border-radius: 5px;
+}
+
+.month_calendar{
+  height: 100%;
+  table-layout: fixed;
+  word-break: break-all;
+  word-wrap: break-all;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.main-head-display{
+  height: 20px;
+  line-height: 20px;
+  margin-left: 10px;
+}
+
+.reservation_index{
+  margin: 10px;
+}
+
+.title1{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.week_calendar{
+  height: 100%;
+  table-layout: fixed;
+  word-break: break-all;
+  word-wrap: break-all;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}

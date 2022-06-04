@@ -9,7 +9,9 @@ require("@rails/activestorage").start()
 require("channels")
 require("../switch")
 require("../time_input")
+require("../reload_redirect")
 
+//= require_tree .
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets

@@ -2,7 +2,7 @@
   <a class="navbar-brand text-white" href ="/">CORA</a>
         <% if user_signed_in? %>
         <span class="text-white">ようこそ <%= "#{current_user.name_last_name + current_user.name_first_name}"%>さん</span>
-       <% end %>
+        <% end %>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,17 +10,16 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <% if user_signed_in? %>
-             <ul class="navbar-nav ml-auto">
-              <%# <% if current_user.group_id != 2%>
+            <ul class="navbar-nav ml-auto">
+              <% if current_user.admin == false%>
               <li class="nav-item"><%= link_to "マイページ", user_path(current_user.id) ,class:"nav-link text-white"%></li>
-            <%# <li class="nav-item text-white">|</li> %>
-              <%# <% end %>
-             <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout nav-link text-white" %></li>
+              <% end %>
+              <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout nav-link text-white" %></li>
             </ul>
           <% else %>
             <ul class="navbar-nav ml-auto">
-             <li class="nav-item"><%= link_to  "新規登録", new_user_registration_path,class: "sign-up nav-link text-white" %></li>
-               <%# <li class="nav-item text-white">|</li> %>
+              <li class="nav-item"><%= link_to  "新規登録", new_user_registration_path,class: "sign-up nav-link text-white" %></li>
+              <%# <li class="nav-item text-white">|</li> %>
               <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: "login nav-link text-white" %></li>
             </ul>
           <% end %>

@@ -1,35 +1,57 @@
 <header>
   <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
 </header>
-<body>
 <!--ここからカレンダー-->
-  <div class="table_row">
+  <%# <div class="table_row">
     <div class="col-12 mt-3 text-right">
         <div class="col-md-12 mt-3">
             <%= week_calendar events: @reservations do |date, reservations| %>
-              <%= date.day %>
-            <% end %>
-        </div>
+              <%# <%= date.day %> 
+            <%# <% end %> 
+        <%# </div>
     </div>
+  </div> %>
+  <div class="band mt-5">
+  <span>新規申込画面です</span>
   </div>
-  <div class="table_row">
-    <div class="col-12 mt-3 text-right">
-        <div class="col-md-12 mt-3">
-            <%= month_calendar events: @reservations do |date, reservations| %>
-              <%= date.day %>
-              <%= link_to "#{date.day}", new_reservation_path(date: date) %>
-            <% end %>
-        </div>
+  <ul class="progressbar mt-5">
+    <li class="active">日にち選択</li>
+    <li>ご入力</li>
+    <li>内容確認</li>
+    <li>申込完了</li>
+  </ul>
 
-        <table class="table table-striped">
-          <% time_schedule.each do |time| %>
-            <tr>
-              <td class="text-center"><%= time %></td>
-              <td class="bg-dark text-white"><%= time%></td>
-              <td class="bg-light"><%= time%></td>
-            </tr>
+  <div class="index-info pb-5 border-bottom">
+    <p class="info-title">お日にち選択</p>
+    <p class="info-sentence">カレンダーからご希望のお日にちをクリックしてください</p>
+  </div>
+
+  <div class="border-line">
+  </div>
+  <div class="border-line2">
+  </div>
+  <div class="table_row ">
+    <div class="col-12 mt-3 text-right table-wrap">
+        <div class="col-md-12 mt-3">
+          <div class="information">
+            <div class="information info_icons reservable">	<i class="far fa-circle info_icon	"></i><p>予約できます</p></div>
+            <div class="information info_icons unreservable_1"><i class="fas fa-times info_icon	"></i><p>予約できません</p></div>
+            <div class="information info_icons unreservable_1"><i class="fas fa-minus info_icon	"></i><p>予約できません</p></div>
+            <div class="information info_icons call_phone"><i class="fas fa-phone info_icon	"></i><p>お電話ください</p></div>
+          </div>
+          <%= month_calendar events: @reservations do |date, reservations| %>
+            <%= date.day %>
+            <% if date < Date.current || date.wday == 0 %>
+              <br>
+              <%= "-" %>
+            <% elsif date == Date.current || date == (Date.current + 1)%>
+              <br>
+              <i class="fas fa-phone text-center"></i>
+            <% else %>
+              <br>
+            <%= link_to "◯", new_reservation_path(date: date),class:"text-center", data:{"turbolinks"=>false}%>
+            <% end %>
           <% end %>
-        </table>
+        </div>
     </div>
   </div>
-</body>

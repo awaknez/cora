@@ -1,0 +1,33 @@
+.confirm-sentence{
+  color: #446d71;
+}
+
+.confirm-info{
+  text-align: center;
+}
+.item-heading{
+  border: 1px solid lightgray;
+  text-align: center;
+  background-color: #cccccc;
+  margin-bottom: 0;
+}
+
+.item-content{
+  height: 40px;
+  text-align: center;
+  font-size: 18px;
+  background-color: white;
+}
+
+.submit{
+  margin: 0 auto;
+}
+
+.form-group p{
+  text-align: center;
+}
+
+.confirm-sentence2{
+  font-size: 14px;
+  color: red;
+}

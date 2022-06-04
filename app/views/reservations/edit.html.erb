@@ -1,9 +1,22 @@
-<!-- new.html.erb -->
+<header>
+  <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
+</header>
+
+  <div class="band mt-5">
+    <span>申込内容編集画面です</span>
+  </div>
 <div class="container">
-  <div class="row bg-light">
-      <div class="col-12 text-center title border-bottom">
-        <h1>申込内容編集画面</h1>
-      </div>
+
+    <div class="col-12 text-center mt-3 pb-4 border-bottom">
+      <p class="info-title">申込内容の変更</p>
+      <p class="info-sentence">変更項目をご入力ください</p>
+    </div>
+    <div class="border-line">
+    </div>
+    <div class="border-line2">
+    </div>
+
+    <div class="row bg-light">
         <% flash.each do |message_type, message| %>
           <p class="alert_message"><%= message %></p>
         <% end %>
@@ -49,10 +62,12 @@
         <div class="submit">
           <%= form.submit value: '変更する', class: 'btn mx-auto d-block common-btn' %>
         </div>
-         <% end %>
-        <div class="col-12 text-right">
+        <% end %>
+        <div class="form-group">
+          <div class=" btn back-btn btn-outline-secondary mx-auto">
           <%= link_to '戻る', reservation_path(@reservation) %><!--詳細ページへ戻す-->
-        </div>  
+          </div>
+        </div>
       </div>
     </div>
 </div>

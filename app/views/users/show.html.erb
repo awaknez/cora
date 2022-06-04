@@ -1,10 +1,17 @@
-<%= render partial: "shared/header", locals:{ reservation: @user}%>
-<div class="container mt-5">
-  <div class="row">
+  <header>
+    <%= render partial: "shared/header", locals:{ reservation: @user}%>
+  </header>
+
+  <div class="band mt-5">
+    <span><%= "#{current_user.name_last_name}" + " " "#{current_user.name_first_name}"%>さんの申込一覧です</span>
+  </div>
+
       <%# ようこそ<%= @user_nameさん %>
       <%# <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %>
-      <div class="col-12 mt-3 text-center mx-auto">
-        <h3>申込一覧</h3>
+      <div class="index-info mt-3">
+        <p class="info-title">申込状況一覧</p>
+      </div>
+      <div class="col-10 mt-3 text-center mx-auto">
           <% flash.each do |message_type, message| %>
             <p class="flash_danger"><%= message %></p>
           <% end %>
@@ -34,9 +41,10 @@
               <% end %>
             </tbody>
           </table>
-           <div class="text-right mt-3">
-            <%=link_to "空き状況ページに戻る", root_path %>
-           </div>    
+          <div class="form-group">
+            <div class=" btn back-btn btn-outline-secondary mx-auto">
+              <%=link_to "予約ページに戻る", root_path %>
+            </div>
+          </div>
+        </div>    
       </div>  
-  </div>
-</div>
