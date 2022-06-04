@@ -1,3 +1,7 @@
 .navbar-dark .navbar-toggler {
   border :none;
 }
+
+.nav-link{
+  text-align: center;
+}

@@ -1,5 +1,5 @@
 module ReservationsHelper
-   def time_schedule
+  def time_schedule
     time_schedules =[
                     "13:00",
                     "13:30",
@@ -12,23 +12,23 @@ module ReservationsHelper
                     "17:00",
                     "17:30",
                     "18:00" ]
-   end 
+  end 
 
   def check_reservation(reservations, day, time)
       result = false
       reservations_count = reservations.count
   #   # 取得した予約データにdayとtimeが一致する場合はtrue,一致しない場合はfalseを返します
-      if reservations_count > 1
-         reservations.each do |reservation|
-           result = reservation[:date].eql?(day.strftime("%Y-%m-%d")) && reservation[:time].eql?(time)
-           return result if result
-         end
-      elsif reservations_count == 1
+    if reservations_count > 1
+        reservations.each do |reservation|
+          result = reservation[:date].eql?(day) && reservation[:time].eql?(time)
+          return result if result
+        end
+    elsif reservations_count == 1
         result = reservations[0][:date].eql?(day.strftime("%Y-%m-%d")) && reservations[0][:time].eql?(time)
         return result if result
       end
-     return result
-   end
+    return result
+    end
 
 end
 

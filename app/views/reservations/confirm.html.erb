@@ -1,0 +1,75 @@
+<header>
+  <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
+</header>
+
+<div class="band mt-5">
+  <span><%= current_user.grade.name%>の新規申込画面です</span>
+</div>
+  
+<div class="container">
+  <ul class="progressbar">
+    <li class="complete">日にち選択</li>
+    <li class="complete">ご入力</li>
+    <li class="active">内容確認</li>
+    <li>完了</li>
+  </ul>
+        <div class="index-info">
+          <p class="info-title">お申込み内容の確認</p>
+          <p class="confirm-sentence">まだ、お手続きは完了しておりません</p>
+          <p class="confirm-sentence2">※ご注意　画面の更新（リロード）は行わないでください</p>
+      </div>
+  <div class="confirm-contents">
+      <div class="confirm-contents__item">
+        <p class ="item-heading">
+          お日にち</p>
+        <p class="item-content">
+          <%= @reservation.date %></p>
+      </div>
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+          開始時刻</p>
+        <p class="item-content">
+          <%= @reservation.time%></p>
+      </div>
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+          面談形式</p>
+        <p class="item-content">
+          <%= @reservation.style.name %></p>
+      </div>
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+          ご参加予定人数</p>
+        <p class="item-content">
+          <%= @reservation.number_of_people.name %></p>
+      </div>  
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+          面談で相談したいこと</p>
+        <p class="item-content">
+          <%= @reservation.question %></p>
+      </div>
+
+      <%= form_with(model: @reservation, local: true, id: "confirm-event") do |f| %>
+      <div class="form">
+        <div class="form-group">
+            <div class="submit">
+              <%= f.submit "申込", class: " btn common-btn complete-btn mx-auto" %>
+            </div>
+            <div class="form-group">
+              <%= f.submit"申込みをやり直す", name: :back, class: " btn btn-outline-secondary back-btn mx-auto" %>
+              <p>※予約ページの<br>TOPに戻ります<p>
+            </div>
+            <%= f.hidden_field :date %>
+            <%= f.hidden_field :time %>
+            <%= f.hidden_field :style_id %>
+            <%= f.hidden_field :number_of_people_id %>
+            <%= f.hidden_field :start_time %>
+
+            <%= f.hidden_field :question %>
+
+          <% end %>
+        </div>
+      </div>
+  </div>
+</div>

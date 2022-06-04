@@ -1,18 +1,37 @@
-<%# <header>
-<%= render partial: "shared/header", locals:{ reservation: @reservation}%>
-<%# </header>  %>
 <body>
-<%# <div class="container pt-5"> %>
-      <h3>申込一覧</h3>
-      <ul>
-      <li class="nav-item"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout " %></li>
-      </ul>
-      <button type="button" class="btn btn-outline-secondary" id="switchbtn-index">一覧表示のみ</button>
-      <button type="button" class="btn btn-outline-secondary" id="switchbtn-calendar">カレンダー表示のみ</button>
-      <button type="button" class="btn btn-outline-secondary" id="switchbtn-both">一覧・カレンダー表示</button>
-      <button type="button" class="btn btn-secondary"><%= link_to 'csv出力', admin_reservations_path(format: :csv),class:"text-white" %></button>
-
-        <table class="table-striped col-12 mt-3 mx-auto" id ="reservation-index">
+  <div class="body-wrap">
+    <div class="side-bar">
+      <div class="side-bar-head">
+        <div class="title">
+          <%= link_to "CORA",admin_reservations_path %>
+        </div>
+        <div class="admin_logout">
+          <%= link_to "ログアウト", destroy_user_session_path,method: :delete %>
+        </div>
+      </div>
+      <div class="user-name">
+        <%= "ようこそ  #{current_user.name_last_name}"+"#{current_user.name_first_name}さん"%>
+      </div>
+      <div class="side-menu">
+        <br>
+        <button type="button" class="btn btn-secondary switch-btn"><%= link_to 'csv出力', admin_reservations_path(format: :csv),class:"text-white" %></button>
+      </div>
+    </div>
+    <div class="main">
+      <div class="main-head">
+        <div class="main-head-left">
+          <div class=" main-head-display h4 col-3">申込み状況</div>
+          <div class="main-head-left-index" id ="reservation-index-title" style="display:none;">一覧表示</div>
+          <div class="main-head-left-calendar" id="reservation-month-calendar-title">カレンダー表示</div>
+        </div>
+        <div class="switch-btns">
+          <button type="button" class="col-sm-6 btn btn-secondary switch-btn w-auto" id="switchbtn-calendar"><span class="text-white w-auto col-3">カレンダー表示</span></button>
+          <button type="button" class="col-sm-6 btn btn-secondary switch-btn w-auto" id="switchbtn-index"><span class="text-white w-auto col-3">一覧表示</span></button>
+          <%# <button type="button" class="btn btn-secondary switch-btn w-auto" id="switchbtn-both">一覧・カレンダー表示</button> %>
+        </div>
+      </div>
+      <div class="main-body">
+        <table class="table-striped col-10 mx-auto reservation_index" id ="reservation-index" style="display:none;">
           <thead class="border">
             <tr class="table_title">
               <td>お日にち</td>
@@ -42,24 +61,24 @@
             <% end %>
             </tbody>
         </table>
-  <div class="table_row" >
-<!--ここからカレンダー-->
-    <div class="col-12 mt-3 text-right" id="reservation-month-calendar">
-
-      <%= month_calendar events: @reservations do |date, reservations| %>
-          <%= date.day %>
-          <% reservations.each do |reservation|%>
-            <div class="reserve_content">
-              <%= link_to "#{(reservation.time)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", admin_reservation_path(reservation.id)%>
-            </div>
-
-          <% end %>
-      <% end %>
+        <div class="admin_table_row">
+          <div class="col-12 mt-3 text-right" id="reservation-month-calendar" >
+            <%= week_calendar events: @reservations do |date, reservations| %>
+                <%= date.day %>
+                <% reservations.each do |reservation|%>
+                  <div class="reserve_content">
+                    <%= link_to "#{(reservation.time)+' '+(reservation.user.name_last_name)+(reservation.user.name_first_name) }", admin_reservation_path(reservation.id)%>
+                  </div>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
-<%# 
-              <div class="content-list">
+
+<%# <div class="content-list">
                 <ul class="hidden">
                   <li><%= reservation.date.strftime("%m月%d日")</li>
                   <li><%= reservation.time</li>
@@ -71,11 +90,10 @@
                   <li><%= link_to "編集",edit_admin_reservation_path(reservation.id)</li>
                   <li><%= link_to "削除",admin_reservation_path(reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※日時変更の場合は削除してください" }</li>
                 </ul>
-            </div> %>
-
+            </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script>
     $('[data-toggle="popover"]').popover();
-  </script>
+  </script> %>

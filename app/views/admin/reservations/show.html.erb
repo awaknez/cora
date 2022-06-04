@@ -1,62 +1,59 @@
-<%# <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
-
-<div class="container col-12 mt-5">
-
-  <div class="h2 mt-5">申込詳細</div>
-
-    <table class="table">
-      <thead>
-        <tr>
-        <td colspan="2" class="bg-light">学年</td>
-        <td colspan="2" class="bg-light">生徒氏名</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <td colspan="2" class="text-center"><%= @reservation.user.grade.name %></td>
-            <td colspan="2" class="text-center"><%= (@reservation.user.name_last_name)+(@reservation.user.name_first_name) %></td>
-        </tr>
-        <tr>
-          <td class="bg-light">お日にち</td>
-          <td class="bg-light">時間</td>
-          <td class="bg-light">面談形式</td>
-          <td class="bg-light">ご参加予定人数</td>
-        </tr>
-        <tr>
-          <td><%= @reservation.date.strftime("%Y年%m月%d日")%></td>
-          <td><%= @reservation.time%></td>
-          <td><%= @reservation.style.name%></td>
-          <td><%= @reservation.number_of_people.name%></td>
-        </tr>
-        <tr>
-          <td colspan="4" class="bg-light">面談で相談したいこと</td>
-        </tr>
-        <tr>
-          <td colspan="4"><%= @reservation.question%></td>
-        </tr>
-        <br />
-      </tbody>
-    </table>
-    <div class="row">
-      <div class="d-flex ">
-        <div class="col-6 ">
-          <p class ="u-ta-center">
-                <%= link_to edit_admin_reservation_path(@reservation.id), class:" text-white" do%>
-                  <div class="btn btn-success btn-block">編集</div>
-                <% end %>
+<div class="container mt-5">
+<header>
+  <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
+</header>
+<div class="space">
+</div>
+    <div class="col-12 text-center info-title border-bottom mt-5">
+        申込詳細
+    </div>    
+    <div class="thx-sentence mt-3">
+      <p>面談形式の変更・ご参加人数の変更は下記編集ボタンから、<br/>
+        日時変更は一度申込みを削除してください。
+    </div>
+    <div class="confirm-contents__item">
+      <p class ="item-heading">
+        お日にち</p>
+      <p class="item-content">
+        <%= @reservation.date %></p>
+      </div>
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+          開始時刻</p>
+        <p class="item-content">
+        <%= @reservation.time%></p>
+      </div>
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+        面談形式</p>
+        <p class="item-content">
+        <%= @reservation.style.name %></p>
+      </div>
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+          ご参加予定人数</p>
+        <p class="item-content">
+          <%= @reservation.number_of_people.name %></p>
+      </div>  
+      <div class="confirm-contents__item">
+        <p class="item-heading">
+          面談で相談したいこと</p>
+        <p class="item-content">
+          <%= @reservation.question %></p>
         </div>
-        <div class="col-6">
-          <p class ="u-ta-center">
-            <div>
-              <%= link_to admin_reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※保護者の了承を得ている場合のみ削除してください" }, class:"text-white" do%>
-                <div class="btn btn-danger btn-block">削除</div>
-              <% end %>
-            </div>
+        <div class="form-group">
+          <div class="submit">
+            <%=link_to "編集する", edit_admin_reservation_path(@reservation.id), class: 'btn btn-success mx-auto d-block mt-4'%><br />
+          </div>
+          <div class="submit">
+            <%= link_to "削除する", admin_reservation_path(@reservation.id),method: :delete ,data: { confirm: "申し込みを削除してもよろしいですか？\n ※保護者の了承を得ている場合のみ削除してください" }, class:"btn btn-danger mx-auto d-block mt-4" %>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class=" btn back-btn btn-outline-secondary mx-auto">
+            <%= link_to "TOPページに戻る", admin_reservations_path %>
+          </div>
         </div>
       </div>
-    </div>
-    <br />
-    <div class="text-right">
-    <%=link_to "TOPページに戻る", admin_reservations_path%>
-    </div>
-</div>
+  </div>
+

@@ -39,6 +39,8 @@ Things you may want to cover:
 | name_first_name_kana  | string     | null: false                    |
 | name_last_name_kana   | string     | null: false                    |
 | group_id              | integer    | null: false                    |
+| admin                 | boolean    |                     |
+
 
 ### Association
 - has_many :reservations

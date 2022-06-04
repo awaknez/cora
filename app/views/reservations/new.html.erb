@@ -1,23 +1,67 @@
 <!-- new.html.erb -->
-<div class="container">
-  <div class="row bg-light">
-    <div class="col-12 text-center title h1 border-bottom">
-      新規予約画面
-    </div>
-    <% days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]%>
 
+<header>
+  <%= render partial: "shared/header", locals:{ reservation: @reservation}%>
+</header>
+
+  <div class="band mt-5">
+    <span>新規申込画面です</span>
+  </div>
+  <div class="container">
+      <ul class="progressbar">
+        <li class="complete">日にち選択</li>
+        <li class="active">ご入力</li>
+        <li>内容確認</li>
+        <li>完了</li>
+      </ul>
+
+    <div class="col-12 text-center pb-4 border-bottom">
+      <p class="info-title">申込内容のご入力</p>
+      <p class="info-sentence">下記の項目をご入力ください</p>
+    </div>
+
+    <div class="border-line">
+    </div>
+    <div class="border-line2">
+    </div>
+
+  <div class="row bg-light">
+    <% days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]%>
+    <% reservations = Reservation.reservations_after_three_month %>
     <%# <div class="wrap-fluid"> %>
-        <div class="col-12 mt-3 content">
-          <%= form_with model: @reservation, local: true, class: 'form' do |form| %>
+        <div class="col-12 content">
+          <%= form_with model: @reservation, url: "/reservations/confirm", local: true, class: 'form' do |form| %>
           <%= render 'devise/shared/error_messages', model: form.object %>
-          <div class="day form-group">
+          <div class="day form-group ">
             <%= form.label :date, '日付' %>
-            <%= form.text_field :date, class: 'form-control', value: @date, readonly: true %>
+            <%= form.text_field :date, class: 'form-control', id:"date_input", value: @date, readonly: true %>
             <%# <p><%="#{days[@date_wday]}"%>
           </div>
           <div class="time form-group">
-            <%= form.label :time, '時間' %>
-            <%= form.text_field :time, class: 'form-control',  value: @time, readonly: true %>
+          <p>開始時刻<br>（ご希望時間の◯をクリックしてください）</p>
+
+          <table class="bordered table-hover target-table" id="target-table">
+            <% time_schedule.each do |time| %>
+          <tr>
+            <td class="text-center time_index td01"><%= time %></td>
+              <% if @date == Date.current %>
+              <td class="text-center reserve_index" id="reserve_index">
+                <i class="fas fa-phone"></i>
+              <% elsif check_reservation(reservations, @date, time) %>
+              <td class="text-center reserve_index bg-secondary text-white" id="reserve_index">
+                <%= '×' %>
+              <% else %>
+              <td class="text-center reserve_index" id="reserve_index">
+                <%= '○'%>
+              <% end %>
+                <!-- ここまで -->
+            </td>
+          </tr>
+        <% end %>
+    
+      </table>
+            <%= form.label :time, '開始時刻(自動で入力されます）' %>
+            <%= form.text_field :time, class: 'form-control', readonly:true, id:"time_input" %>
           </div>
           <div class="form">
             <div class="form-group">
@@ -43,16 +87,19 @@
               </div>
               <%= form.text_area :question, class:"question-input", id:"pre-question", placeholder:"面談でご相談したいことや備考がございましたらご記入ください。", rows:"7" ,maxlength:"1000"%>
             </div>
-
-          <%# <%= form.hidden_field :user_id, value: current_user.id %>
-          <%= form.hidden_field :start_time, value: @start_time %>
+          <%# <%= form.hidden_field :user_id, value: current_user.id ,value: @start_time%>
+          <%= form.hidden_field :start_time, readonly:true, value:@start_time,id:"start_time_input"%>
           <div class="submit">
-            <%= form.submit value: '予約する', class: 'btn mx-auto d-block common-btn' %>
+            <%= form.submit value: '予約する', class: 'btn mx-auto d-block common-btn',data:{"turbolinks"=>false} %>
+            <p><br>※（ご注意）入力内容に不備があると<br>エラーでTOPページに戻ります</p>
           </div>
-        <% end %>
-    <div class="col-12 text-right">
-      <%= link_to '戻る', reservations_path %>
-    </div>
+          <div class="form-group">
+            <div class=" btn back-btn btn-outline-secondary mx-auto">
+              <%= link_to '戻る', reservations_path %>
+            </div>
+          </div>
+      <% end %>
     </div>
   </div>
+
 </div>
