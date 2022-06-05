@@ -3,13 +3,15 @@
     <%= form_with model:@user, url: user_session_path, id: 'registration-main', class:'registration-main', local: true do |f| %>
       <div class='form-wrap'>
         <div class='form-header'>
-          <h1 class='form-header-text'>
-            ユーザー情報入力
-          </h1>
+          <div class='form-header-text'>
+          </div>
         </div>
         <div class='login-flash-message'>
           <%= flash[:notice] %>
           <%= flash[:alert] %>
+        </div>
+        <div class="login_regist">
+          <p>ログイン</p>
         </div>
         <div class="form-group">
           <div class='form-text-wrap'>
