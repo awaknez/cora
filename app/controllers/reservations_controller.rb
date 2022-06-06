@@ -34,9 +34,10 @@ class ReservationsController < ApplicationController
     end_time = @reservation.time.gsub(":", "").to_i + 100
     calendar_parse_end = @reservation.date.strftime("%Y%m%d")+"T"+ "#{end_time}" +"00"+"Z"
     @calendar_url = 'http://www.google.com/calendar/event?action=TEMPLATE' +
-    '&text=面談' +
-    '&dates=' + "#{calendar_parse_begin}" + '/' + "#{calendar_parse_end}" + 
-    '&location=' + "#{@reservation.question}" + 'ctz=Asia%2FTokyo&trp=undefined&trp=true&sprop='
+    '&text=面談' + '&details='+ "#{@reservation.question}" + '&dates=20220622T1730Z/20220622T1830Z' +
+    # '&dates=' + "#{calendar_parse_begin}" + '/' + "#{calendar_parse_end}" + 
+    '&location=&trp=undefined&trp=true&sprop='
+    # &ctz=Asia/Tokyo
     binding.pry
   end
 

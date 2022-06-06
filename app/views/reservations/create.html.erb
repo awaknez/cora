@@ -65,8 +65,9 @@
           <%=link_to "マイページで申込状況を確認する", user_path(current_user.id), class: 'btn common-btn mx-auto d-block mt-4'%><br />
         </div>
       </div>
-
-      <%= link_to "グーグルカレンダーに登録する", "#{@calendar_url}" %>
+      <div class="form-group to_g-calendar">
+      <i class="far fa-calendar-alt"><%= link_to "Googleカレンダーに登録する", "#{@calendar_url}",target: :_blank, rel: "noopener noreferrer" %></i>
+      </div>
       <%# <div class="form-group">
         <%=link_to "空き状況ページに戻る", root_path %>
       <%# </div>  %>
