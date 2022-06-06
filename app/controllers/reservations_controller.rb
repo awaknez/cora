@@ -30,6 +30,14 @@ class ReservationsController < ApplicationController
     # else
       # redirect_to user_path(current_user.id)
     end
+    calendar_parse_begin = @reservation.date.strftime("%Y%m%d")+"T"+@reservation.time.gsub(":", "")+"00"+"Z"
+    end_time = @reservation.time.gsub(":", "").to_i + 100
+    calendar_parse_end = @reservation.date.strftime("%Y%m%d")+"T"+ "#{end_time}" +"00"+"Z"
+    @calendar_url = 'http://www.google.com/calendar/event?action=TEMPLATE' +
+    '&text=面談' +
+    '&dates=' + "#{calendar_parse_begin}" + '/' + "#{calendar_parse_end}" + 
+    '&location=' + "#{@reservation.question}" + 'ctz=Asia%2FTokyo&trp=undefined&trp=true&sprop='
+    binding.pry
   end
 
   def show
