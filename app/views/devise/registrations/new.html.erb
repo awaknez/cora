@@ -1,13 +1,15 @@
 <div class="container">
   <%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
   <div class='form-wrap'>
-        <div class='form-header'>
+        <div class='form-header mb-5'>
           <h1 class='form-header-text border-bottom mb-5'>
           </h1>
         </div>
 
       <%# <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <div>
         <%= render "devise/shared/error_messages", model:f.object %>
+        </div>
         <div class="login_regist">
           <p>会員情報入力</p>
         </div>

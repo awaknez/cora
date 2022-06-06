@@ -14,7 +14,7 @@ class User < ApplicationRecord
     validates :school_id,             numericality: { other_than: 1 ,message: "を選んでください"}
     validates :grade_id,              numericality: { other_than: 1 ,message: "を選んでください"}
     validates :class_id,              numericality: { other_than: 1 ,message: "を選んでください"}
-    validates :group_id
+    # validates :group_id
     validates :password,              format: { with:/\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i} #英数字６字以上。大文字含む。
   end
 
