@@ -30,6 +30,8 @@ class ReservationsController < ApplicationController
     # else
       # redirect_to user_path(current_user.id)
     end
+    # プライベートメソッドの呼び出し
+    gcalendar_forcreate
   end
 
   def show
@@ -38,6 +40,7 @@ class ReservationsController < ApplicationController
       redirect_to root_path
     else
       @reservation = Reservation.find(params[:id])
+      gcalendar_forshow
     end
   end
 
@@ -94,6 +97,31 @@ class ReservationsController < ApplicationController
     if current_user.admin?
       redirect_to admin_reservations_path 
     end
+  end
+
+  # googleCalendar登録用メソッド
+  def gcalendar_forcreate
+    date_convert = @reservation.start_time
+    date_convert2 = date_convert-18.hour
+    calendar_parse_begin = date_convert2.strftime("%Y%m%d")+"T"+date_convert2.strftime("%H%M%S")+"Z"
+    end_time = date_convert2 + 1.hour
+    calendar_parse_end = end_time.strftime("%Y%m%d")+"T"+end_time.strftime("%H%M%S")+"Z"
+    @calendar_url = 'http://www.google.com/calendar/event?action=TEMPLATE' +
+    '&text=面談' + '&details='+ "#{@reservation.question}" + 
+    '&dates=' + "#{calendar_parse_begin}" + '/' + "#{calendar_parse_end}" + 
+    '&location=&trp=undefined&trp=true&sprop='
+  end
+
+  def gcalendar_forshow
+    date_convert = @reservation.start_time
+    date_convert3 = date_convert-9.hour
+    calendar_parse_begin = date_convert3.strftime("%Y%m%d")+"T"+date_convert3.strftime("%H%M%S")+"Z"
+    end_time = date_convert3 + 1.hour
+    calendar_parse_end = end_time.strftime("%Y%m%d")+"T"+end_time.strftime("%H%M%S")+"Z"
+    @calendar_url = 'http://www.google.com/calendar/event?action=TEMPLATE' +
+    '&text=面談' + '&details='+ "#{@reservation.question}" + 
+    '&dates=' + "#{calendar_parse_begin}" + '/' + "#{calendar_parse_end}" + 
+    '&location=&trp=undefined&trp=true&sprop='
   end
 
 end
