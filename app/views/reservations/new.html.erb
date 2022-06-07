@@ -42,8 +42,16 @@
 
           <table class="bordered table-hover target-table" id="target-table">
             <% time_schedule.each do |time| %>
-          <tr>
-            <td class="text-center time_index td01"><%= time %></td>
+            <tr>
+              <% if check_reservation(reservations, @date, time) %>
+                <td class="text-center  bg-secondary text-white" id="reserve_index">
+                  <%= time %>
+                </td>
+              <% else %>
+                <td class="text-center time_index td01">
+                  <%= time %>
+                </td>
+              <% end %>
               <% if @date == Date.current %>
               <td class="text-center reserve_index" id="reserve_index">
                 <i class="fas fa-phone"></i>
