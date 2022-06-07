@@ -38,7 +38,7 @@
             <%# <p><%="#{days[@date_wday]}"%>
           </div>
           <div class="time form-group">
-          <p>開始時刻<br>（ご希望時間の◯をクリックしてください）</p>
+          <p class="text-left">開始時刻<br>（ご希望時間の◯をクリックしてください）</p>
 
           <table class="bordered table-hover target-table" id="target-table">
             <% time_schedule.each do |time| %>
@@ -68,7 +68,7 @@
         <% end %>
     
       </table>
-            <%= form.label :time, '開始時刻(自動で入力されます）' %>
+            <%= form.label :time, '開始時刻 (確認用 ※自動で入力されます）' %>
             <%= form.text_field :time, class: 'form-control', readonly:true, id:"time_input" %>
           </div>
           <div class="form">
