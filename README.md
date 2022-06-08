@@ -5,8 +5,8 @@ CORA -COnsultation Reservation Application-
 ---
 面談などを予約管理できるアプリケーションです。
 
-![トップ画面](https://gyazo.com/2414e967874e71db832c07872becd541)
-![新規予約画面](https://gyazo.com/c5694e57a9ee57c3ade3203ce2ae9db1)
+![トップ画面](../images/cora_top.png)
+![新規予約画面](../images/cora_newreservation.png)
 
 ## URL
 ---
