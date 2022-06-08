@@ -5,8 +5,8 @@ CORA -COnsultation Reservation Application-
 ---
 面談などを予約管理できるアプリケーションです。
 
-![トップ画面](../images/cora_top.png)
-![新規予約画面](../images/cora_newreservation.png)
+![トップ画面](app/assets/images/cora_top.png)
+![新規予約画面](app/assets/images/cora_newreservation.png)
 
 ## URL
 ---
@@ -14,8 +14,15 @@ https://cora-37871.herokuapp.com/
 
 ## テスト用アカウント
 ---
-メールアドレス：kobashi-takuro@sample.com
-  パスワード：kobashitakuro2
+Basic認証
+- ユーザー名：admin
+- パスワード：3594
+
+<br>
+テスト用アカウント
+
+- メールアドレス：kobashi-takuro@sample.com
+- パスワード：kobashitakuro2
   
 ## 使用言語、環境、テクノロジー
 ---
