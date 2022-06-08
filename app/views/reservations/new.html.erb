@@ -30,6 +30,12 @@
     <% reservations = Reservation.reservations_after_three_month %>
     <%# <div class="wrap-fluid"> %>
         <div class="col-12 content">
+          <div class="information info_attention">【マークの見方】</div>
+          <div class="information">
+            <div class="information info_icons reservable">	<i class="far fa-circle info_icon	"></i><p>予約できます</p></div>
+            <div class="information info_icons unreservable_1"><i class="fas fa-times info_icon	"></i><p>予約できません</p></div>
+            <div class="information info_icons call_phone"><i class="fas fa-phone info_icon	"></i><p>お電話ください</p></div>
+          </div>
           <%= form_with model: @reservation, url: "/reservations/confirm", local: true, class: 'form' do |form| %>
           <%= render 'devise/shared/error_messages', model: form.object %>
           <div class="day form-group ">

@@ -147,3 +147,22 @@ color:#475D77;
   box-sizing: border-box;
   display: block;
 }
+
+.info_attention{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.reserv-btn{
+  border: 0.5 solid lightgray;
+  background-color: #d5a7d5;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding:5px;
+  color: white;
+
+}
+.reserv-btn a{
+  font-size: 12px;
+  text-decoration: none;
+}
