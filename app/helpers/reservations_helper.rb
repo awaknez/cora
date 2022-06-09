@@ -24,7 +24,7 @@ module ReservationsHelper
           return result if result
         end
     elsif reservations_count == 1
-        result = reservations[0][:date].eql?(day.strftime("%Y-%m-%d")) && reservations[0][:time].eql?(time)
+        result = reservations[0][:date].eql?(day) && reservations[0][:time].eql?(time)
         return result if result
       end
     return result
