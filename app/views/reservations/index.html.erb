@@ -45,9 +45,12 @@
             <% elsif date == Date.current || date == (Date.current + 1)%>
               <br>
               <i class="fas fa-phone text-center"></i>
+            <% elsif check_reservation_monthly(@reservations,date) %>
+              <br>
+              <p class ="unreservable"><%="×"%></p>
             <% else %>
               <br>
-            <%= link_to "予約する", new_reservation_path(date: date),class:"reserv-btn text-center", data:{"turbolinks"=>false}%>
+              <%= link_to "予約する", new_reservation_path(date: date),class:"reserv-btn text-center", data:{"turbolinks"=>false}%>
             <% end %>
           <% end %>
         </div>

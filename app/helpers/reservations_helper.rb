@@ -29,7 +29,29 @@ module ReservationsHelper
       end
     return result
     end
-
 end
 
 # .strftime("%Y-%m-%d")
+
+def check_reservation_monthly(reservations,day)
+  # 第一引数にレコード、第二引数にカレンダーのdateの情報が入る
+  # 新しい配列を定義
+  result = false
+  reservations_count_formonth = []
+  # 条件に当てはまるものを配列に追加
+  # reservation = reservations.where(start_time:day+"22:00"..(day+1)+"04:00")
+  # reservations_count_formonth << reservation
+
+  reservations.each do |reservation|
+    if reservation.date.eql?(day)
+      reservations_count_formonth << reservation
+    end
+  end
+  # 新しい配列の要素の数がtime_schedulesの要素の数と一致していればtrueを代入
+  if reservations_count_formonth.count == 11
+    result = true
+  end
+  # binding.pry
+  # reservations.where(start_time:  "#{hoge}" .. "#{fuga}")
+  # return result
+end
