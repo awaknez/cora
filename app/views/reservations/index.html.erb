@@ -33,24 +33,25 @@
   <div class="table_row ">
     <div class="col-12 mt-3 text-right table-wrap">
         <div class="col-md-12 mt-3">
-          <div class="information info_attention">【ご注意】当日・翌日のお申込はお電話ください</div>
+          <div class="information info_attention">【マークの見方】</div>
+          <div class="info_attention2">※ご注意 当日・翌日のお申込はお電話ください</div>
           <div class="information">
+            <div class="information info_icons reservable">	<i class="far fa-circle info_icon	"></i><p>予約できます</p></div>
+            <div class="information info_icons unreservable_1"><i class="fas fa-times info_icon	"></i><p>/</p><i class="fas fa-minus info_icon2	"></i><p>予約できません</p></div>
             <div class="information info_icons call_phone"><i class="fas fa-phone info_icon	"></i><p>お電話ください</p></div>
           </div>
           <%= month_calendar events: @reservations do |date, reservations| %>
             <%= date.day %>
             <% if date < Date.current || date.wday == 0 %>
               <br>
-              <%= "-" %>
+              <p class="unreservable"><%= "-" %></p>
             <% elsif date == Date.current || date == (Date.current + 1)%>
               <br>
-              <i class="fas fa-phone text-center"></i>
+              <i class="fas fa-phone text-center unreservable"></i>
             <% elsif check_reservation_monthly(@reservations,date) %>
-              <br>
-              <p class ="unreservable"><%="×"%></p>
+              <p class="unreservable"><%="×"%></p>
             <% else %>
-              <br>
-              <%= link_to "予約する", new_reservation_path(date: date),class:"reserv-btn text-center", data:{"turbolinks"=>false}%>
+              <p class="reserv-btn text-right"><%= link_to "◯", new_reservation_path(date: date), data:{"turbolinks"=>false}%></p>
             <% end %>
           <% end %>
         </div>
