@@ -11,7 +11,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.new
     @date = params[:date]
     @time = params[:time]
-    @date_wday = Time.strptime(@date, '%Y-%m-%d').wday
+    # @date_wday = Date.strptime(@date, '%Y-%m-%d').wday
     @start_time = DateTime.parse(@date + " " + "JST")
     @student_name = (current_user.name_last_name) + " " + (current_user.name_first_name)
   end
