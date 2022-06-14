@@ -173,3 +173,9 @@ color:#475D77;
   font-size:20px;
   font-weight: bold;
 }
+
+.movie_area{
+  height: 300px;
+  width: 90%;
+  margin: 0 auto;
+}
